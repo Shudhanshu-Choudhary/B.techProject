@@ -1,0 +1,48 @@
+@mixin fontStyle($size,$weight,$color){
+  font-family: Rubik;
+  font-size: $size;
+  font-weight: $weight;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  color: $color;
+}
+
+.pc{
+  &-button{
+    &-container{
+      display: flex;
+      justify-content: space-around;
+      padding: 1rem 0;
+    }
+    &-add,&-buy{
+      width: 8.5rem;
+      height: 2.75rem;
+      display: flex;
+      border-radius: 0.3rem;
+      justify-content: center;
+      align-items: center;
+      span{
+        @include fontStyle(1rem,500,#2766cc);
+      }
+    }
+    &-add{
+      border: solid 2px #2766cc;
+    }
+    &-buy{
+      background: #f8de4b;
+    }
+  }
+}
+
+.homepage-container {
+  &-cars {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .car-card {
+    margin: 0 1.4rem;
+  }
+}

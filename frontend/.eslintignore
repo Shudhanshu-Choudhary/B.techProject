@@ -1,0 +1,4 @@
+# Ignoring the assets/vendor since it's 3rd part code.
+vendor
+src/protectedRoute.ts
+protectedRoute.ts

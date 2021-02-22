@@ -1,0 +1,54 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "start": "ts-node src/app.ts",
+    "build": "tsc",
+    "start:watch": "nodemon",
+    "lint": "eslint src/**/*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "jest": {
+    "testEnvironment": "node",
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      "^.+\\.(ts|tsx)$": "ts-jest"
+    }
+  },
+  "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/body-parser": "^1.19.0",
+    "@types/jest": "^26.0.14",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "jest": "^26.5.2",
+    "migrate-mongo": "^8.1.4",
+    "mongodb": "^3.6.2",
+    "mongoose": "^5.10.7",
+    "pre-commit": "^1.2.2"
+  },
+  "devDependencies": {
+    "@types/express": "github:types/express",
+    "@types/mongoose": "^5.7.36",
+    "@types/node": "^14.11.2",
+    "@typescript-eslint/eslint-plugin": "^4.3.0",
+    "@typescript-eslint/parser": "^4.3.0",
+    "eslint": "^7.10.0",
+    "nodemon": "^2.0.4",
+    "ts-jest": "^26.4.1",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}

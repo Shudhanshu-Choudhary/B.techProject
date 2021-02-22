@@ -1,0 +1,34 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    "quotes": ["error", "double"],
+    "indent": ["error", 2],
+    "no-console": ["error", { "allow": ["info", "warn", "error"] }],
+    "eol-last": ["error", "always"],
+    "semi": [2, "always"],
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }],
+    "@typescript-eslint/explicit-function-return-type": ["error"],
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "@typescript-eslint/typedef": [
+      "error",
+      {
+        "variableDeclaration": true
+      }
+    ],
+    "@typescript-eslint/no-inferrable-types": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "object-curly-spacing": ["error", "always", { "objectsInObjects": true }],
+    "key-spacing": [2, {"beforeColon": false, "afterColon": true}],
+    "space-infix-ops": ["error", { "int32Hint": false }]
+  }
+}
