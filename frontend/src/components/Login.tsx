@@ -53,7 +53,7 @@ class Login extends React.Component<any,IState>{
       <div className='signin-main-container'>
         <div className='signin-content-container'>
           <div className='signin-header'>
-            <span>Welcome to Elite Cars</span>
+            <span>Welcome to Ticker Chart</span>
           </div>
           <Form>
             <div className='signin-email-container'>
@@ -88,7 +88,7 @@ class Login extends React.Component<any,IState>{
               <Icon name='facebook' /> Facebook
             </Button>
             <Button color='google plus'>
-              <Icon name='google plus' /> Google
+              <Icon name='google' /> Google
             </Button>
           </div>
 
