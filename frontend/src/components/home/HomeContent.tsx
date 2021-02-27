@@ -1,7 +1,6 @@
 import React from "react";
 import {Card, Feed, Table} from 'semantic-ui-react';
 import "../../assets/scss/components/home/homeContent.scss";
-import DataPieChart from "../base/DataPieChart";
 
 const HomeContent = ()=>{
     const renderTableBody = ()=>{
@@ -34,7 +33,7 @@ const HomeContent = ()=>{
                             <Feed.Content className='hc-card-content'>
                                 <Feed.Date content='1 day ago' />
                                 <Feed.Summary>
-                                    You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+                                    You added Jenny Hess to your coworker group.
                                 </Feed.Summary>
                             </Feed.Content>
                         </Feed.Event>
@@ -43,7 +42,7 @@ const HomeContent = ()=>{
                             <Feed.Content className='hc-card-content'>
                                 <Feed.Date content='3 days ago' />
                                 <Feed.Summary>
-                                    You added <a>Molly Malone</a> as a friend.
+                                    You added Molly Malone as a friend.
                                 </Feed.Summary>
                             </Feed.Content>
                         </Feed.Event>
@@ -52,7 +51,7 @@ const HomeContent = ()=>{
                             <Feed.Content className='hc-card-content'>
                                 <Feed.Date content='4 days ago' />
                                 <Feed.Summary>
-                                    You added <a>Elliot Baker</a> to your <a>musicians</a> group.
+                                    You added Elliot Baker to your musicians group.
                                 </Feed.Summary>
                             </Feed.Content>
                         </Feed.Event>
