@@ -10,6 +10,14 @@ const HomeContent = ()=>{
 
     return(
         <div className="hc-main-container">
+            <Card className='hc-card'>
+                <div className='hc-card-header'>Stock Mentions</div>
+                <HomeBarChart/>
+            </Card>
+            <Card className='hc-card'>
+                <div className='hc-card-header'>All Activity</div>
+                <HomeAreaChart/>
+            </Card>
             <Card className="hc-first-container hc-card">
                 <div className='hc-card-header'>Most Mentioned Activity</div>
                 <HomeTweets/>
@@ -19,14 +27,6 @@ const HomeContent = ()=>{
                 <div className='hc-table-container'>
                     <HomeTable/>
                 </div>
-            </Card>
-            <Card className='hc-card'>
-                <div className='hc-card-header'>Stock Mentions</div>
-                <HomeBarChart/>
-            </Card>
-            <Card className='hc-card'>
-                <div className='hc-card-header'>All Activity</div>
-                <HomeAreaChart/>
             </Card>
         </div>
     )
