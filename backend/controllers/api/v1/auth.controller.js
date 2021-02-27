@@ -57,7 +57,11 @@ authRouter.get('/facebook-cb', async (req, res) => {
     // }
     const user = await UserService.handleFacebookLogin(facebookUser)
     console.log(user)
-    res.send({user, logInMethod: 'facebook'});
+    res.redirect({user, logInMethod: 'facebook'});
 });
+
+// authRouter.post('/register', async (req, res) => {
+//
+// })
 
 module.exports = {authRouter};
