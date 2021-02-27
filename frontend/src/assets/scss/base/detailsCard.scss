@@ -1,0 +1,35 @@
+@import "styling";
+
+.detailsCard{
+  &-container{
+    width: 19rem;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+    box-shadow: 2px 2px #c3c0c0;
+    margin: 2rem 1rem;
+  }
+  &-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0.3rem;
+    @include fontStyle(1.8rem,500,$card-text-primary-color);
+    text-shadow: 1px 1px #d8d8d8;
+    letter-spacing: 0.3px;
+  }
+  &-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @include fontStyle(1rem,600,$card-text-secondary-color);
+    text-shadow: 1px 1px #f1f0f0;
+    letter-spacing: 1px;
+  }
+}
+.detailsCard-container:hover{
+  transform: scale(1.05);
+  box-shadow: 3px 3px #c3c0c0;
+}

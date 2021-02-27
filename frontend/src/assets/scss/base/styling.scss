@@ -1,0 +1,59 @@
+$font-family-base: 'Rubik', 'sans-serif';
+$header-background-color:#2766cc;
+$header-text-color:#fff;
+$editCard-primary-header-color:#262626;
+$editCard-secondary-header-color:#262626;
+$editCard-description-color:#262626;
+$home-announcement-header-color:#262626;
+$home-announcement-footer-background-color:#2766cc;
+$home-announcement-footer-text-color:#fff;
+$card-text-primary-color: #515050;
+$card-text-secondary-color: #797777;
+$heading-color:#262626;
+$heading-shadow-color:#d8d8d8;
+
+@function randomColorGenerator(){
+  @debug ("hi");
+  $randomColorArray : ['#2766cc','red','green','yellow'];
+  $length:length($randomColorArray);
+  $randomColor : $randomColorArray[floor(random() * $length)];
+  @return $randomColor;
+}
+
+@mixin fontStyle($size,$weight,$color){
+  font-size: $size;
+  font-weight: $weight;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.3;
+  letter-spacing: normal;
+  font-family: $font-family-base;
+  color: $color;
+}
+
+@mixin button ($width,$height,$bcColor,$textColor,$textSize){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $bcColor;
+    height: $height;
+    width: $width;
+    margin: 1rem auto;
+    border-radius: 4px;
+    span{
+      @include fontStyle($textSize,500,$textColor);
+      letter-spacing: 1px;
+    }
+}
+
+@mixin header ($size,$color,$shColor){
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.5rem 0;
+  span{
+    @include fontStyle($size,500,$color);
+    text-shadow: 2px 2px $shColor;
+  }
+}
+
