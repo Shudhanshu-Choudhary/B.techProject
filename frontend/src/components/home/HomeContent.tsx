@@ -21,9 +21,11 @@ const HomeContent = ()=>{
                 </div>
             </Card>
             <Card className='hc-card'>
+                <div className='hc-card-header'>Stock Mentions</div>
                 <HomeBarChart/>
             </Card>
             <Card className='hc-card'>
+                <div className='hc-card-header'>All Activity</div>
                 <HomeAreaChart/>
             </Card>
         </div>
