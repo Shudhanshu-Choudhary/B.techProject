@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "link": "/",
+      "text": "Home",
+      "icon": "home"
+    },
+    {
+      "id": 2,
+      "link": "/posts",
+      "text": "Posts",
+      "icon": "list"
+    },
+    {
+      "id": 3,
+      "link": "/setting",
+      "text": "Account",
+      "icon": "setting"
+    }
+  ]
+}
