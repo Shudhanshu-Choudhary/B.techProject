@@ -1,5 +1,5 @@
 import React from "react";
-import { Form,Input } from "semantic-ui-react";
+import { Button, Divider, Form, Icon, Input } from "semantic-ui-react";
 import "../assets/scss/login.scss";
 import "semantic-ui-css/semantic.min.css";
 import { withRouter } from "react-router-dom";
@@ -53,7 +53,7 @@ class Login extends React.Component<any,IState>{
       <div className='signin-main-container'>
         <div className='signin-content-container'>
           <div className='signin-header'>
-            <span>Welcome to Elite Cars</span>
+            <span>Welcome to Ticker Chart</span>
           </div>
           <Form>
             <div className='signin-email-container'>
@@ -82,6 +82,16 @@ class Login extends React.Component<any,IState>{
           <div onClick={this.continue} className='signin-button'>
             <span>Sign In</span>
           </div>
+          <Divider horizontal>Or</Divider>
+          <div style={{ display: "flex",justifyContent: "space-around" }}>
+            <Button color='facebook'>
+              <Icon name='facebook' /> Facebook
+            </Button>
+            <Button color='google plus'>
+              <Icon name='google' /> Google
+            </Button>
+          </div>
+
           <div className='signin-not-registered'>
             <h5>Not registered yet?</h5>
           </div>
