@@ -1,5 +1,5 @@
 import React from "react";
-import { Form,Input } from "semantic-ui-react";
+import { Button, Form,Input } from "semantic-ui-react";
 import "../assets/scss/login.scss";
 import "semantic-ui-css/semantic.min.css";
 import { withRouter } from "react-router-dom";
@@ -51,6 +51,8 @@ class Login extends React.Component<any,IState>{
   render() {
     return(
       <div className='signin-main-container'>
+        <Button onClick={() => AuthBackendApiService.loginWithGoogle()}>Google</Button>
+        <Button onClick={() => AuthBackendApiService.loginWithFacebook()}>Facebook</Button>
         <div className='signin-content-container'>
           <div className='signin-header'>
             <span>Welcome to Elite Cars</span>

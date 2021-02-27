@@ -11,4 +11,12 @@ export default class AuthBackendApiService {
     const url = baseUrl + "auth/register";
     return axios.post(url,body);
   }
+
+  static async loginWithGoogle() {
+    window.location.href = baseUrl + "auth/login/google";
+  }
+
+  static async loginWithFacebook() {
+    window.location.href = baseUrl + "auth/login/facebook";
+  }
 }
