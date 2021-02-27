@@ -2,6 +2,7 @@ import React from "react";
 import {Button, Divider, Form, Icon, Input} from "semantic-ui-react";
 import "../assets/scss/pages/login.scss";
 import { withRouter } from "react-router-dom";
+import AuthBackendApiService from "../services/authBackendApi.service";
 
 interface IState {
     [key: string]: any; // or the type of your input
@@ -60,10 +61,10 @@ class Login extends React.Component<any,IState>{
                     </div>
                     <Divider horizontal>Or</Divider>
                     <div style={{ display: "flex",justifyContent: "space-around" }}>
-                        <Button color='facebook'>
+                        <Button color='facebook' onClick={() => AuthBackendApiService.loginWithFacebook()}>
                             <Icon name='facebook' /> Facebook
                         </Button>
-                        <Button color='google plus'>
+                        <Button color='google plus' onClick={() => AuthBackendApiService.loginWithGoogle()}>
                             <Icon name='google' /> Google
                         </Button>
                     </div>
