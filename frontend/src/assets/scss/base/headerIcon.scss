@@ -1,0 +1,14 @@
+@import '../base/styling';
+
+.hi{
+  &-header{
+    @include header(1.5rem,$heading-color,$heading-shadow-color);
+  }
+  &-content{
+    &-container{
+      display: flex;
+      justify-content: space-between;
+      margin: 1.5rem 0;
+    }
+  }
+}

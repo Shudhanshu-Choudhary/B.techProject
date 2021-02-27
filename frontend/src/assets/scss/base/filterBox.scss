@@ -1,0 +1,34 @@
+.searchbox {
+  width: 94%;
+  margin: 0 auto;
+  display: block;
+  height: 40px;
+  border-radius: 5px;
+  position: sticky !important;
+  top: 0.2rem;
+  z-index:100;
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #bdbbbb !important;
+    opacity: 1;
+  }
+  .ui.icon.button{
+    background-color: #2766cc;
+  }
+  &-text {
+    div {
+      width: 100%;
+    }
+    input {
+      width: 40px;
+      height: 40px;
+      margin: 0 0 0 134px;
+      border: 0 !important;
+      padding: 9px 8px 7px;
+      background-color: #f0f0f0 !important;
+    }
+    i {
+      opacity: 0.8 !important;
+      color: #ffffff;
+    }
+  }
+}

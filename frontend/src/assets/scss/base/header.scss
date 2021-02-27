@@ -1,0 +1,14 @@
+@import "styling";
+
+.header-container{
+  background-color: $header-background-color;
+  height: 4.3rem;
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 3px #d8d8d8;
+  span{
+    padding-left: 1rem ;
+    @include fontStyle(2rem,500,$header-text-color);
+    letter-spacing: 1px;
+  }
+}
