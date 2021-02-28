@@ -12,6 +12,11 @@ export default class AuthBackendApiService {
     return axios.post(url,body);
   }
 
+  static async getUserFromToken(token: string) {
+    const url = baseUrl + `user?token=${token}`;
+    return axios.get(url);
+  }
+
   static async loginWithGoogle() {
     window.location.href = baseUrl + "auth/login/google";
   }

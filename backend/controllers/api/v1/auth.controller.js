@@ -2,7 +2,8 @@ const express = require('express');
 const UserService = require('../../../services/UserService');
 const GoogleConnection = require('../../../connections/google');
 const FacebookConnection = require("../../../connections/facebook");
-
+const constants = require('../../../constants')
+const {AuthenticationUtil} = require("../../../services/JWTService");
 const authRouter = express.Router();
 
 authRouter.get('/login/google', async (req, res) => {
@@ -24,11 +25,10 @@ authRouter.get('/google-cb', async (req, res) => {
     //   picture: 'https://lh3.googleusercontent.com/a-/AOh14GhutBxPgWIY3MHTiCZ-iC3AhEobPxQr-Z0fzFd7Nw=s96-c',
     //   locale: 'en-GB'
     // }
-    // console.log(user)
     const user = await UserService.handleGoogleLogin(googleUser)
-    console.log('Returning this user');
-    console.log(user);
-    res.send({user, logInMethod: 'google'});
+    const token = await AuthenticationUtil.generateJWTToken(user, 'google');
+    const url = `${constants.appUrl}?token=${token}`
+    res.redirect(url);
 });
 
 authRouter.get('/login/facebook', async (req, res) => {
@@ -56,12 +56,25 @@ authRouter.get('/facebook-cb', async (req, res) => {
     //   }
     // }
     const user = await UserService.handleFacebookLogin(facebookUser)
-    console.log(user)
-    res.redirect({user, logInMethod: 'facebook'});
+    const token = await AuthenticationUtil.generateJWTToken(user, 'facebook');
+    const url = `${constants.appUrl}?token=${token}`
+    res.redirect(url);
 });
 
-// authRouter.post('/register', async (req, res) => {
-//
-// })
+authRouter.post('/register', async (req, res) => {
+    const body = req.body;
+    const user = await UserService.createUser(body);
+    res.status(201).send(user);
+})
+
+authRouter.post('/login', async (req, res) => {
+    const body = req.body;
+    const user = await UserService.login(body);
+    if(user === 'Invalid email') {
+        res.status(400).send(('Invalid email'));
+    } else if(user === 'Invalid password') {
+        res.status(400).send(('Invalid password'));
+    } else res.status(200).send(user);
+})
 
 module.exports = {authRouter};

@@ -14,7 +14,7 @@
     },
     {
       "id": 3,
-      "link": "/setting",
+      "link": "/account",
       "text": "Account",
       "icon": "setting"
     }
