@@ -32,7 +32,7 @@ const Post = ()=>{
       Logger.log(stock);
       const thumbnail = (stock.thumbnail === "default" || stock.thumbnail === "self") ? defaultThumbnail : stock.thumbnail;
       stockCards.push(
-        <Card>
+        <Card style={{ margin: "1rem" }}>
           <Card.Content header={`${stock.title} `} />
           <Card.Content description={`by ${stock.author}`} />
           <Card.Content extra>
@@ -50,7 +50,9 @@ const Post = ()=>{
   return(
     <Layout header='DashBoard'>
       <h3>Hello from post page</h3>
-      {renderStockData()}
+      <div style={{ display: "flex", flexWrap: "wrap", margin: "1rem" }}>
+        {renderStockData()}
+      </div>
     </Layout>
   );
 };
