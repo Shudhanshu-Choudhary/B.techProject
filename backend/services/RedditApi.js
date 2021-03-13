@@ -1,39 +1,41 @@
 const axios = require('axios');
-const fs = require("fs");
+const { Stock } = require("../models");
+const { v4: uuidv4 } = require('uuid');
+const {stockToWatchList} = require('../constants')
 
-function nextweek(){
-    var today = new Date();
-    var nextweek = new Date(today.getFullYear(), today.getMonth(), today.getDate()-7);
-    return nextweek;
-}
-
-function convertToEpoch(dateString) {
-    var parts = datestring.match(/(\d{2})\/(\d{2})\/(\d{4}) (\d{2}):(\d{2})/);
-    return Date.UTC(+parts[3], parts[2]-1, +parts[1], +parts[4], +parts[5]);
-}
-console.log(nextweek().toString())
-console.log(nextweek().getTime())
-
-//last week
-//last month
-//today
-// const stockToWatchList = ["AAP","ALV","AMC","ARMK","BA","BABA","BAC","BB","BBY","BMY","CEA","DAL","DIS","GM","GME","LUV","NIO","PLTR","SAVE","SQ","T","TWTR","AAL","AAPL","APHA","FB","MARA","OPEN","PLUG","RIOT","SNDL","SWIR","TLRY","TSLA","TZOO","UAL","WEN","WING","ZM","ZNGA"]
-const stockToWatchList = ["AAP","ALV"]
 class RedditService {
-    static async fetchStockData() {
-        const punshiftApi = 'https://api.pushshift.io/reddit/submission/search/?q=\'DIS\'&subreddit=wallstreetbets,stocks'
+    static async getStock(i) {
+        const stock = stockToWatchList[i];
+        //currDate format: '2021-03-12';
+        const currDate = new Date().toISOString().slice(0,10);
+        let start = Math.floor(new Date(`${currDate}T00:00:00Z`).getTime()/1000)
+        let end = Math.floor(new Date(`${currDate}T23:59:59Z`).getTime()/1000)
+        console.log(start, end)
+        let punshiftApi = `https://api.pushshift.io/reddit/submission/search/?q=\'${stock}\'&subreddit=wallstreetbets,stocks&after=${start}&before=${end}&limit=1000`;
         const res = await axios.get(punshiftApi);
-        let data = JSON.stringify(res.data);
-        console.log('This is the data')
-        fs.writeFileSync('disData.json', data);
-        return res.data;
+        const stockRow = await Stock.findOne({where: {date: currDate}})
+        if(stockRow) {
+            stockRow[stock] = res.data.data.length
+            await stockRow.save();
+        } else {
+            const stockRow = await Stock.create({
+                id: uuidv4(),
+                date: currDate,
+                [stock]: res.data.data.length
+            })
+            await stockRow.save();
+        }
+        if(i+1===stockToWatchList.length) {
+            return 'Done';
+        } else await this.getStock(++i)
     }
+
     static async populateStocksData() {
-        // let punshiftApi = 'https://api.pushshift.io/reddit/submission/search/?q=\'DIS\'&subreddit=wallstreetbets,stocks'
-        stockToWatchList.map(async (stock) => {
-            let punshiftApi = `https://api.pushshift.io/reddit/submission/search/?q='${stock}'&subreddit=wallstreetbets,stocks`;
-            const res = await axios.get(punshiftApi);
-            console.log(res.data)
+        return new Promise((resolve, reject) => {
+            this.getStock(0).then(() => {
+                console.log('Done')
+                resolve()
+            })
         })
     }
 }

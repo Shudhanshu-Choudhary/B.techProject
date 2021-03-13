@@ -10,5 +10,6 @@ const getColumns = (Sequelize) => {
 }
 module.exports = {
     appUrl: 'http://localhost:3000',
-    getColumns
+    getColumns,
+    stockToWatchList
 }

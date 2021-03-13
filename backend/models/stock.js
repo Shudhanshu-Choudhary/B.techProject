@@ -19,6 +19,10 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.UUID,
             primaryKey: true
         },
+        date: {
+            allowNull: false,
+            type: DataTypes.DATEONLY
+        },
         ...getColumns(DataTypes)
     }, {
         sequelize,
