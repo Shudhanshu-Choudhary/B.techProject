@@ -25,6 +25,16 @@ app.get('/api/v1/stocks-data', async (req,res) => {
     res.status(200).send(stocksData)
 });
 
+app.get('/api/v1/populate-data', async (req, res) => {
+    try {
+        await RedditService.populateStocksData();
+        res.status(200).send('Populated')
+    } catch (e) {
+        const message = e.message || 'Failed while populating data.'
+        res.status(400).send({message})
+    }
+})
+
 app.get('/api/v1/user', async (req,res) => {
     const token = req.query.token;
     const user = await AuthenticationUtil.getUserFromJWTToken(token)

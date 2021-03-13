@@ -17,7 +17,8 @@ console.log(nextweek().getTime())
 //last week
 //last month
 //today
-const stockToWatchList = ["AAP","ALV","AMC","ARMK","BA","BABA","BAC","BB","BBY","BMY","CEA","DAL","DIS","GM","GME","LUV","NIO","PLTR","SAVE","SQ","T","TWTR","AAL","AAPL","APHA","FB","MARA","OPEN","PLUG","RIOT","SNDL","SWIR","TLRY","TSLA","TZOO","UAL","WEN","WING","ZM","ZNGA"]
+// const stockToWatchList = ["AAP","ALV","AMC","ARMK","BA","BABA","BAC","BB","BBY","BMY","CEA","DAL","DIS","GM","GME","LUV","NIO","PLTR","SAVE","SQ","T","TWTR","AAL","AAPL","APHA","FB","MARA","OPEN","PLUG","RIOT","SNDL","SWIR","TLRY","TSLA","TZOO","UAL","WEN","WING","ZM","ZNGA"]
+const stockToWatchList = ["AAP","ALV"]
 class RedditService {
     static async fetchStockData() {
         const punshiftApi = 'https://api.pushshift.io/reddit/submission/search/?q=\'DIS\'&subreddit=wallstreetbets,stocks'
@@ -26,6 +27,14 @@ class RedditService {
         console.log('This is the data')
         fs.writeFileSync('disData.json', data);
         return res.data;
+    }
+    static async populateStocksData() {
+        // let punshiftApi = 'https://api.pushshift.io/reddit/submission/search/?q=\'DIS\'&subreddit=wallstreetbets,stocks'
+        stockToWatchList.map(async (stock) => {
+            let punshiftApi = `https://api.pushshift.io/reddit/submission/search/?q='${stock}'&subreddit=wallstreetbets,stocks`;
+            const res = await axios.get(punshiftApi);
+            console.log(res.data)
+        })
     }
 }
 
