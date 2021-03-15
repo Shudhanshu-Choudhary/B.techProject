@@ -23,6 +23,10 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             type: DataTypes.DATEONLY
         },
+        maxStockDatePairString: {
+            allowNull: true,
+            type: DataTypes.STRING
+        },
         ...getColumns(DataTypes)
     }, {
         sequelize,

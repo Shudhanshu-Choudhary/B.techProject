@@ -42,6 +42,15 @@ app.get('/api/v1/user', async (req,res) => {
     res.status(200).send(user)
 });
 
+app.get('/api/v1/test', async (req, res) => {
+    const stocks = await RedditService.test();
+    stocks.map((stock) => {
+        console.log(stock.dataValues.id)
+        console.log(stock.dataValues.date)
+    })
+    res.status(200).send(stocks);
+})
+
 app.listen(PORT, () => {
     console.log("The server started on port " + PORT);
 });
