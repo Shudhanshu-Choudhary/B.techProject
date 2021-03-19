@@ -68,7 +68,8 @@ class RedditService {
     }
 
     static async test() {
-        const stocks = await Stock.findAll({where: { date: {[Op.between]: ['2021-02-21', '2021-03-14']}}})
+        // const stocks = await Stock.findAll({where: { date: {[Op.between]: ['2021-02-21', '2021-03-14']}}})
+        const stocks = await Stock.findAll({order: [['date', 'ASC']]})
         return stocks;
     }
 }
