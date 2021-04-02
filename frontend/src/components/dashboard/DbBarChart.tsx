@@ -1,7 +1,8 @@
 import React from "react";
-import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 
-const HomeAreaChart = ()=>{
+const DbBarChart = ()=>{
+
   const data = [
     {
       name: "Page A",
@@ -48,23 +49,15 @@ const HomeAreaChart = ()=>{
   ];
 
   return(
-    <AreaChart
-      width={500}
-      height={400}
-      data={data}
-      margin={{
-        top: 10,
-        right: 30,
-        left: 0,
-        bottom: 0,
-      }}
-    >
+    <BarChart width={500} height={300} data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5, }}>
       <CartesianGrid strokeDasharray="3 3" />
       <XAxis dataKey="name" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#8884d8" />
-    </AreaChart>
+      <Legend />
+      <Bar dataKey="pv" stackId="a" fill="#8884d8" />
+      <Bar dataKey="uv" stackId="a" fill="#82ca9d" />
+    </BarChart>
   );
 };
-export default HomeAreaChart;
+export default DbBarChart;

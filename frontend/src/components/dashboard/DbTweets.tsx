@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Feed } from "semantic-ui-react";
 
-const HomeTweets = ()=>{
+const DbTweets = ()=>{
   return(
     <Card.Content>
       <Feed>
@@ -35,4 +35,4 @@ const HomeTweets = ()=>{
     </Card.Content>
   );
 };
-export default HomeTweets;
+export default DbTweets;

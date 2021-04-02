@@ -1,7 +1,7 @@
 import React from "react";
 import EditCardPostView from "../base/EditCardPostView";
 
-const HomeAnnouncements = ()=>{
+const DbAnnouncements = ()=>{
   return(
     <div className='home-announcement-main-container'>
       <div className="home-announcement-header">
@@ -16,4 +16,4 @@ const HomeAnnouncements = ()=>{
     </div>
   );
 };
-export default HomeAnnouncements;
+export default DbAnnouncements;

@@ -1,7 +1,7 @@
 import React from "react";
 import DetailsCard from "../base/DetailsCard";
 
-const HomeCards = ()=>{
+const DbCards = ()=>{
   return(
     <div className="home-card-container">
       <DetailsCard text={"CCIV"} header={"Most Mentioned Today"} color={"#FFF"}/>
@@ -11,4 +11,4 @@ const HomeCards = ()=>{
     </div>
   );
 };
-export default HomeCards;
+export default DbCards;
