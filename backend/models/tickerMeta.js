@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.UUID,
             primaryKey: true
         },
+        date: {
+            type: DataTypes.STRING
+        },
         lastWeek: {
             type: DataTypes.STRING
         },

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const app = express();
 var cookieParser = require('cookie-parser');
 const RedditService = require("./services/RedditApi");
+const TickerMetaService = require("./services/TickerMetaService");
 const {AuthenticationUtil} = require("./services/JWTService");
 const authRouter = require('./controllers/api/v1/auth.controller').authRouter;
 
@@ -48,6 +49,10 @@ app.get('/api/v1/test', async (req, res) => {
         console.log(stock.dataValues.id)
         console.log(stock.dataValues.date)
     })
+    res.status(200).send(stocks);
+})
+app.get('/api/v1/test-cron', async (req, res) => {
+    const stocks = await TickerMetaService.updateMeta();
     res.status(200).send(stocks);
 })
 
