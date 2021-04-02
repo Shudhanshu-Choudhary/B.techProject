@@ -1,10 +1,10 @@
 import React from "react";
-import HomeAnnouncements from "../home/HomeAnnouncements";
+import DbAnnouncements from "../dashboard/DbAnnouncements";
 
 const PostView = ()=>{
   return(
     <div className = 'apw-main-container'>
-      <HomeAnnouncements/>
+      <DbAnnouncements/>
     </div>
   );
 };

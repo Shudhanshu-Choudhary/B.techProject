@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "semantic-ui-react";
 
-const HomeTable = ()=>{
+const DbTable = ()=>{
   const renderTableBody = ()=>{
     return(
       <Table.Body>
@@ -36,4 +36,4 @@ const HomeTable = ()=>{
     </Table>
   );
 };
-export default HomeTable;
+export default DbTable;

@@ -1,34 +1,27 @@
 import React from "react";
-import "../assets/scss/pages/home.scss";
-import HomeAnnouncements from "../components/home/HomeAnnouncements";
-import HomeCards from "../components/home/HomeCards";
-import HomeContent from "../components/home/HomeContent";
-import Layout from "../components/base/Layout";
-import { withRouter } from "react-router-dom";
-import StorageService from "../services/storageService";
-import AuthBackendApiService from "../services/authBackendApi.service";
+import Intro6 from "../components/home/Intro6";
+import Marketing1 from "../components/home/Marketing1";
+import Services8 from "../components/home/Services8";
+import TopBar6 from "../components/home/TopBar6";
+import Testimonial6 from "../components/home/Testimonial6";
+import Pricing2 from "../components/home/Pricing2";
+import Blog1 from "../components/home/Blog1";
+import Subscription1 from "../components/home/Subscription1";
+import Footer2 from "../components/home/Footer2";
 
-const Home = (props: any) => {
-  const query = new URLSearchParams(props.location.search);
-  const token = query.get("token");
-  const getUser = async () => {
-    const user = await AuthBackendApiService.getUserFromToken(token);
-    const userData = JSON.stringify(user.data);
-    StorageService.setKey("userData", userData);
-  };
-  if (token != null) {
-    getUser();
-    StorageService.setKey("token", token);
-  }
-    
+const Home = ()=>{
   return(
-    <Layout header='DashBoard'>
-      <div className='home-main-container'>
-        <HomeCards/>
-        <HomeContent/>
-        <HomeAnnouncements/>
-      </div>
-    </Layout>
+    <div className="landing">
+      <TopBar6 />
+      <Intro6 />
+      <Services8 />
+      <Marketing1 />
+      <Testimonial6 />
+      <Pricing2 />
+      <Blog1 />
+      <Subscription1 />
+      <Footer2 />
+    </div>
   );
 };
-export default withRouter(Home);
+export default Home;
