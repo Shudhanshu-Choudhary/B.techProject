@@ -52,7 +52,7 @@ const TopBar6 = (props) => {
     >
       <div className="container header-container">
         <div className="brand">
-          <img src="./assets/images/react-logo.svg" alt="" />
+          <img src="../../assets/img/react-logo.svg" alt="" />
         </div>
         <ul className="navigation">
           <li>

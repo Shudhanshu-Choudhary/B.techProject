@@ -7,7 +7,7 @@ interface IHeader{
 
 const Header = (props:IHeader)=>{
   return(
-    <div className="header-container">
+    <div className="Pheader-container">
       <span>{props.primaryHeader}</span>
     </div>
   );
