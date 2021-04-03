@@ -100,7 +100,7 @@ const TopBar6 = (props) => {
               Login
             </Button>
           </NavLink>
-          <NavLink to="/signup">
+          <NavLink to="/register">
             <Button
               className="box-shadow-none px-8 rounded-r hover-bg-primary capitalize"
               variant="outlined"
