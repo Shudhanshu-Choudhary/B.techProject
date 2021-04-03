@@ -2,7 +2,7 @@
 const {
     Model
 } = require('sequelize');
-const {getColumns} = require('../constants')
+
 module.exports = (sequelize, DataTypes) => {
     class TickerMeta extends Model {
         /**

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Stock } = require("../models");
+const { Stock, TickerMeta } = require("../models");
 const { v4: uuidv4 } = require('uuid');
 const {stockToWatchList} = require('../constants')
 const Sequelize = require('sequelize');
@@ -11,8 +11,9 @@ class RedditService {
     // '2021-03-12'
     static currDate = new Date().toISOString().slice(0,10);
 
-    static async updateDate() {
-        this.currDate = '2021-02-22';
+    static async updateDate(date) {
+        // this.currDate = date
+        this.currDate = '2021-03-31';
         // this.currDate = new Date().toISOString().slice(0,10);
     }
     static async getStock(i) {
@@ -23,6 +24,7 @@ class RedditService {
         let punshiftApi = `https://api.pushshift.io/reddit/submission/search/?q=\'${stock}\'&subreddit=wallstreetbets,stocks&after=${start}&before=${end}&limit=1000`;
         const res = await axios.get(punshiftApi);
         const stockRow = await Stock.findOne({where: {date: this.currDate}})
+        console.log(res.data.data.length)
         if(stockRow) {
             stockRow[stock] = res.data.data.length
             if(this.maxStockCount < res.data.data.length) {
@@ -49,6 +51,9 @@ class RedditService {
 
     static async populateStocksData() {
         return new Promise((resolve, reject) => {
+            const dates = ['2021-03-21', '2021-03-22', '2021-03-23', '2021-03-24','2021-03-25' ,'2021-03-26','2021-03-27','2021-03-28',
+                '2021-03-29','2021-03-30','2021-03-31','2021-04-01', '2021-04-02s']
+            // dates.forEach((date) => {
             this.updateDate();
             this.getStock(0).then(async () => {
                 console.log('Done')
@@ -60,11 +65,13 @@ class RedditService {
                 }
                 RedditService.maxStockCount = null;
                 RedditService.maxStockName = null;
+                console.log('Before resolve')
                 resolve()
             }).catch((e) => {
                 reject(e);
             })
-        })
+            })
+        // })
     }
 
     static async test() {
@@ -72,6 +79,17 @@ class RedditService {
         const stocks = await Stock.findAll({order: [['date', 'ASC']]})
         return stocks;
     }
-}
 
+    static async getData() {
+        const stock = await Stock.findAll({
+            limit: 1,
+            order: [ [ 'createdAt', 'DESC' ]]
+        });
+        const stockMeta = await TickerMeta.findOne();
+        return {stock: stock[0], stockMeta}
+    }
+}
+// RedditService.populateStocksData().then(() => {
+//     console.log('Finnalyu')
+// })
 module.exports = RedditService;

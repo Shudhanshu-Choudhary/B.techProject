@@ -33,6 +33,7 @@ class TickerMetaService {
     }
     static async updateMeta() {
         const todaysDate = new Date().toISOString().slice(0,10);
+        // const todaysDate = "2021-04-02";
         //Get today's date using the JavaScript Date object.
         let ourDate = new Date();
         //Change it so that it is 7 days in the past.
@@ -53,21 +54,35 @@ class TickerMetaService {
         console.log(pastDate);
         const lastMonthStocks = await Stock.findAll({attributes: ['maxStockDatePairString'], where: { date: {[Op.between]: [lastMonthDate, todaysDate]}}})
         const lastWeekStocks = await Stock.findAll({attributes: ['maxStockDatePairString'], where: { date: {[Op.between]: [lastWeekDate, todaysDate]}}})
-        const yesterdayStock = await Stock.findAll({attributes: ['maxStockDatePairString'], where: {date: pastDate}})
-        const todayStock = await Stock.findAll({attributes: ['maxStockDatePairString'], where: {date: todaysDate}})
-
+        const yesterdayStock = await Stock.findOne({attributes: ['maxStockDatePairString'], where: {date: pastDate}})
+        const todayStock = await Stock.findOne({attributes: ['maxStockDatePairString'], where: {date: todaysDate}})
 
         const lastMonthStockPair = this.fetchMaxStockFromStocks(lastMonthStocks)
         const lastWeekStockPair = this.fetchMaxStockFromStocks(lastWeekStocks)
         // fetch tickers with proper dates
-        const tickerMeta = await TickerMeta.create({
-            date: todaysDate,
-            lastMonth: lastMonthStockPair,
-            lastWeek: lastWeekStockPair,
-            yesterday: yesterdayStock,
-            today: todayStock
-        })
-        console.log('Done', tickerMeta);
+        const tickerMeta = await TickerMeta.findOne();
+        if(tickerMeta) {
+            console.log('Updatign meta')
+                tickerMeta.date = todaysDate;
+                tickerMeta.lastMonth = lastMonthStockPair;
+                tickerMeta.lastWeek = lastWeekStockPair;
+                tickerMeta.yesterday = yesterdayStock && yesterdayStock.maxStockDatePairString || null;
+                tickerMeta.today = todayStock && todayStock.maxStockDatePairString || null;
+                await tickerMeta.save();
+                return tickerMeta;
+        } else {
+            console.log('Creating meta')
+
+            const tickerMeta = await TickerMeta.create({
+                id: uuidv4(),
+                date: todaysDate,
+                lastMonth: lastMonthStockPair,
+                lastWeek: lastWeekStockPair,
+                yesterday: yesterdayStock && yesterdayStock.maxStockDatePairString || null,
+                today: todayStock && todayStock.maxStockDatePairString || null
+            })
+            return tickerMeta;
+        }
     }
 }
 

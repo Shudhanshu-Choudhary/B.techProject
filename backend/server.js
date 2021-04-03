@@ -35,6 +35,15 @@ app.get('/api/v1/populate-data', async (req, res) => {
         res.status(400).send({message})
     }
 })
+app.get('/api/v1/update-meta', async (req, res) => {
+    try {
+        await TickerMetaService.updateMeta();
+        res.status(200).send('Populated')
+    } catch (e) {
+        const message = e.message || 'Failed while populating data.'
+        res.status(400).send({message})
+    }
+})
 
 app.get('/api/v1/user', async (req,res) => {
     const token = req.query.token;
@@ -55,7 +64,10 @@ app.get('/api/v1/test-cron', async (req, res) => {
     const stocks = await TickerMetaService.updateMeta();
     res.status(200).send(stocks);
 })
-
+app.get('/api/v1/data', async (req, res) => {
+    const stockData = await RedditService.getData();
+    res.status(200).send(stockData)
+})
 app.listen(PORT, () => {
     console.log("The server started on port " + PORT);
 });

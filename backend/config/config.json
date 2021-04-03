@@ -2,8 +2,8 @@
   "development": {
     "username": "user1",
     "password": "dbpass123",
-    "database": "tickercharts",
-    "host": "127.0.0.1",
+    "database": "marketbuzz",
+    "host": "marketbuzz.cjhq50l15jru.ap-south-1.rds.amazonaws.com",
     "dialect": "postgres"
   },
   "test": {

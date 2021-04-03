@@ -3,18 +3,29 @@ const {getColumns} = require('../constants')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Stocks', {
+    await queryInterface.createTable('TickerMeta', {
       id: {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID
       },
-      ...getColumns(Sequelize),
       date: {
         allowNull: false,
         type: Sequelize.DATEONLY
       },
-      maxStockDatePairString: {
+      lastWeek: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      lastMonth: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      today: {
+        allowNull: true,
+        type: Sequelize.STRING
+      },
+      yesterday: {
         allowNull: true,
         type: Sequelize.STRING
       },
@@ -29,6 +40,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Stocks');
+    await queryInterface.dropTable('TickerMeta');
   }
 };
