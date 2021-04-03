@@ -3,7 +3,7 @@ const {getColumns} = require('../constants')
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.createTable('Stocks', {
+    await queryInterface.createTable('TickerMetas', {
       id: {
         allowNull: false,
         primaryKey: true,
@@ -29,6 +29,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('Stocks');
+    await queryInterface.dropTable('TickerMetas');
   }
 };
