@@ -37,7 +37,7 @@ class Login extends React.Component<any,IState>{
         <div className='signin-main-container'>
           <div className='signin-content-container'>
             <div className='signin-header'>
-              <span>Welcome to Ticker Chart</span>
+              <span>Welcome to Market Buzz</span>
             </div>
             <Form>
               <div className='signin-email-container'>
