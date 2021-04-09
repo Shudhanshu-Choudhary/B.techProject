@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
 import StorageService from "../services/storageService";
-import { Layout } from "./Layout";
+import AdminLayout from "../components/base/AdminLayout";
 
 const Account = ()=>{
   const history = useHistory();
@@ -61,11 +61,11 @@ const Account = ()=>{
       </Card>);
   };
   return(
-    <Layout>
+    <AdminLayout header='Account'>
       <h1>Settings:</h1>
       {renderUser()}
       <Button onClick={handleLogout}>Logout</Button>
-    </Layout>
+    </AdminLayout>
   );
 };
 export default withRouter(Account);
