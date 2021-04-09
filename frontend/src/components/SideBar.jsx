@@ -67,10 +67,10 @@ const SideBar = ()=>{
     <div className='sidebar-main-container'>
       <div className='sidebar-header-container'>
         <span>
-          <span className = 'sidebar-header-color-primary'>T</span>
-          <span className = 'sidebar-header-color-secondary'>ICKER </span>
-          <span className = 'sidebar-header-color-secondary'>RADA</span>
-          <span className = 'sidebar-header-color-primary'>R</span>
+          <span className = 'sidebar-header-color-primary'>M</span>
+          <span className = 'sidebar-header-color-secondary'>arket </span>
+          <span className = 'sidebar-header-color-secondary'>Buz</span>
+          <span className = 'sidebar-header-color-primary'>Z</span>
         </span>
       </div>
       <div className='sidebar-item-container'>

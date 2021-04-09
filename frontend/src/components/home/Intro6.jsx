@@ -26,7 +26,7 @@ const Intro6 = () => {
           )}
         >
           <h1 className="font-normal text-center text-48 mb-4 mt-0">
-            Evelynn Enterprise
+            Market Buzz
           </h1>
           <h2 className="font-normal">Start in style</h2>
           <p className="max-w-550 text-center text-inherit my-12">
