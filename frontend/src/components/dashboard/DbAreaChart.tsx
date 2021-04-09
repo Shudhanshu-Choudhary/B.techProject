@@ -49,7 +49,7 @@ const DbAreaChart = ()=>{
 
   return(
     <AreaChart
-      width={500}
+      width={600}
       height={400}
       data={data}
       margin={{

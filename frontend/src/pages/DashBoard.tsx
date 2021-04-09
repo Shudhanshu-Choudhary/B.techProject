@@ -1,6 +1,5 @@
 import React from "react";
 import "../assets/scss/pages/home.scss";
-import DbAnnouncements from "../components/dashboard/DbAnnouncements";
 import DbCards from "../components/dashboard/DbCards";
 import DbContent from "../components/dashboard/DbContent";
 import AdminLayout from "../components/base/AdminLayout";
@@ -26,7 +25,6 @@ const DashBoard = (props: any) => {
       <div className='home-main-container'>
         <DbCards/>
         <DbContent/>
-        <DbAnnouncements/>
       </div>
     </AdminLayout>
   );

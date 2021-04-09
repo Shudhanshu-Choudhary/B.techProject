@@ -1,14 +1,16 @@
 @import "styling";
 
 .Pheader-container{
-  background-color: $header-background-color;
+  //background-color: $header-background-color;
   height: 4.3rem;
   display: flex;
+  justify-content: center;
   align-items: center;
   box-shadow: 1px 3px #d8d8d8;
   span{
     padding-left: 1rem ;
-    @include fontStyle(2rem,500,$header-text-color);
+    @include fontStyle(2rem,500,#262626);
     letter-spacing: 1px;
+    text-transform: uppercase;
   }
 }

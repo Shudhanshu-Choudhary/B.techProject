@@ -10,10 +10,8 @@ interface IProps {
 const AdminLayout = (props: IProps)=>{
   return(
     <div className='layout-container'>
-      <div className='layout-navbar-container'>
-        <SideBar/>
-      </div>
       <div className='layout-content-container'>
+        <SideBar/>
         <div className='layout-header'>
           <Header primaryHeader={props.header}/>
           {props.children}

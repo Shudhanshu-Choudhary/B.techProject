@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
-import AdminLayout from "../components/base/AdminLayout";
 import { withRouter } from "react-router-dom";
 import { Card } from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
@@ -13,13 +12,13 @@ interface IStock {
     subreddit: string
     thumbnail: string
 }
-const Post = ()=>{
+const PostCards = ()=>{
   const [stocks, setStocks] = useState([]);
 
   useEffect( () => {
     const fetchStocks = async () => {
       // const res = await RedditBackendApiService.fetchStocksData();
-      const res = require("../components/temp-json/disData.json");
+      const res = require("./temp-json/disData.json");
       Logger.log("This is the stocks data for DIS");
       Logger.log(res);
       setStocks(res.data);
@@ -33,11 +32,11 @@ const Post = ()=>{
       Logger.log(stock);
       const thumbnail = (stock.thumbnail === "default" || stock.thumbnail === "self") ? defaultThumbnail : stock.thumbnail;
       stockCards.push(
-        <Card style={{ margin: "1rem" }}>
+        <Card style={{ margin: "1rem",width: "22rem",height: "12rem" }}>
           {/*<Card.Content header={`${stock.title} `} />*/}
           <Card.Content description={`by ${stock.author}`} />
           <Card.Content extra>
-            <img src={thumbnail} style={{ height: "4rem", width: "4rem", borderRadius: "50%" }} alt=""/>
+            <img src={thumbnail} style={{ height: "4rem", width: "5rem", borderRadius: "50%" }} alt=""/>
             <div>
               <span>Subreddit: {stock.subreddit}</span>
             </div>
@@ -49,12 +48,9 @@ const Post = ()=>{
     return stockCards;
   };
   return(
-    <AdminLayout header='DashBoard'>
-      <h3>Hello from post page</h3>
-      <div style={{ display: "flex", flexWrap: "wrap", margin: "1rem" }}>
-        {renderStockData()}
-      </div>
-    </AdminLayout>
+    <div style={{ display: "flex",justifyContent: "space-between", flexWrap: "wrap", margin: "1rem 2rem" }}>
+      {renderStockData()}
+    </div>
   );
 };
-export default withRouter(Post);
+export default withRouter(PostCards);
