@@ -10,7 +10,7 @@ const NavbarComponent = () => {
     <div className="custom-navbar">
       <Navbar color="#2c3e50" light expand="md" style={{ width: "100%", backgroundColor: "#6876c5", height: "4rem" }}>
         <NavbarBrand color={"#FFF"} className='custom-navbar-brand'>
-          <Link color={"#FFF"} to={"/"}>Computer Buzz</Link>
+          <Link color={"#FFF"} to={"/"}>Market Buzz</Link>
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

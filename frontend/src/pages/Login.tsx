@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import AuthBackendApiService from "../services/authBackendApi.service";
 import Logger from "../lib/logger";
 import { Layout } from "./Layout";
+import StorageService from "../services/storageService";
 
 interface IState {
     [key: string]: any; // or the type of your input
@@ -24,6 +25,9 @@ class Login extends React.Component<any,IState>{
       try {
         const res = await AuthBackendApiService.login(this.state);
         Logger.log(res);
+        StorageService.setKey("userData", JSON.stringify(res.data));
+        this.props.history.push("/dashboard");
+
       } catch (e) {
         Logger.log(e.response);
       }
