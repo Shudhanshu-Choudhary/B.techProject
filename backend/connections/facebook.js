@@ -7,7 +7,9 @@ const queryString = require('querystring');
 
 const stringifiedParams = queryString.stringify({
     client_id: APP_ID,
-    redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
+    // redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
+    // redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
+    redirect_uri: 'http://65.0.169.215:5555/api/v1/auth/facebook-cb',
     scope: ['email', 'public_profile'].join(','), // comma seperated string
     response_type: 'code',
     auth_type: 'rerequest'

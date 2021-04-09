@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
-import AdminLayout from "../components/base/AdminLayout";
 import StorageService from "../services/storageService";
+import { Layout } from "./Layout";
 
 const Account = ()=>{
   const history = useHistory();
@@ -37,6 +37,10 @@ const Account = ()=>{
       user["name"] = userData.user.googleName;
       user["email"] = userData.user.googleEmail;
       user["picture"] = userData.user.googlePicture;
+    } else {
+      user["name"] = userData.user.name;
+      user["email"] = userData.user.email;
+      user["picture"] = userData.user.picture;
     }
     return (
       <Card>
@@ -57,11 +61,11 @@ const Account = ()=>{
       </Card>);
   };
   return(
-    <AdminLayout header='DashBoard'>
+    <Layout>
       <h1>Settings:</h1>
       {renderUser()}
       <Button onClick={handleLogout}>Logout</Button>
-    </AdminLayout>
+    </Layout>
   );
 };
 export default withRouter(Account);
