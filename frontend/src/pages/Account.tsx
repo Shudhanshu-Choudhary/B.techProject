@@ -25,7 +25,7 @@ const Account = ()=>{
 
   const handleLogout = () => {
     StorageService.clearStorage();
-    history.push("/login");
+    history.push("/");
   };
   const renderUser = () => {
     const user: any = {};

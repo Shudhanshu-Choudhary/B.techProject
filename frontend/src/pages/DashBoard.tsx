@@ -10,6 +10,7 @@ import AuthBackendApiService from "../services/authBackendApi.service";
 const DashBoard = (props: any) => {
   const query = new URLSearchParams(props.location.search);
   const token = query.get("token");
+  console.log(token);
   const getUser = async () => {
     const user = await AuthBackendApiService.getUserFromToken(token);
     const userData = JSON.stringify(user.data);

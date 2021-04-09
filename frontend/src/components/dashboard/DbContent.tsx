@@ -5,6 +5,8 @@ import DbTweets from "./DbTweets";
 import DbTable from "./DbTable";
 import DbBarChart from "./DbBarChart";
 import DbAreaChart from "./DbAreaChart";
+import DbLineChart from "./DbLineChart";
+import DbPieChart from "./DbPieChart";
 
 const DbContent = ()=>{
 
@@ -22,6 +24,15 @@ const DbContent = ()=>{
         <div className='hc-card-header'>Most Mentioned Activity</div>
         <DbTweets/>
       </Card>
+      <Card className="hc-card">
+        <div className='hc-card-header'>Most Mentioned Activity</div>
+        <DbLineChart/>
+      </Card>
+      <Card className="hc-card">
+        <div className='hc-card-header'>Most Mentioned Activity</div>
+        <DbPieChart/>
+      </Card>
+
       <Card className="hc-second-container hc-card">
         <div className='hc-card-header'>Latest</div>
         <div className='hc-table-container'>
