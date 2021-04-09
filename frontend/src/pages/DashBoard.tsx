@@ -3,7 +3,7 @@ import "../assets/scss/pages/home.scss";
 import DbAnnouncements from "../components/dashboard/DbAnnouncements";
 import DbCards from "../components/dashboard/DbCards";
 import DbContent from "../components/dashboard/DbContent";
-import Layout from "../components/base/Layout";
+import AdminLayout from "../components/base/AdminLayout";
 import { withRouter } from "react-router-dom";
 import StorageService from "../services/storageService";
 import AuthBackendApiService from "../services/authBackendApi.service";
@@ -22,13 +22,13 @@ const DashBoard = (props: any) => {
   }
     
   return(
-    <Layout header='DashBoard'>
+    <AdminLayout header='DashBoard'>
       <div className='home-main-container'>
         <DbCards/>
         <DbContent/>
         <DbAnnouncements/>
       </div>
-    </Layout>
+    </AdminLayout>
   );
 };
 export default withRouter(DashBoard);

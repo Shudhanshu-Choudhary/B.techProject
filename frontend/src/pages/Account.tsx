@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 import { Button, Card, Icon, Image } from "semantic-ui-react";
-import Layout from "../components/base/Layout";
+import AdminLayout from "../components/base/AdminLayout";
 import StorageService from "../services/storageService";
 
 const Account = ()=>{
@@ -57,11 +57,11 @@ const Account = ()=>{
       </Card>);
   };
   return(
-    <Layout header='DashBoard'>
+    <AdminLayout header='DashBoard'>
       <h1>Settings:</h1>
       {renderUser()}
       <Button onClick={handleLogout}>Logout</Button>
-    </Layout>
+    </AdminLayout>
   );
 };
 export default withRouter(Account);

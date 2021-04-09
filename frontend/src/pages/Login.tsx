@@ -4,6 +4,7 @@ import "../assets/scss/pages/login.scss";
 import { withRouter } from "react-router-dom";
 import AuthBackendApiService from "../services/authBackendApi.service";
 import Logger from "../lib/logger";
+import { Layout } from "./Layout";
 
 interface IState {
     [key: string]: any; // or the type of your input
@@ -34,56 +35,58 @@ class Login extends React.Component<any,IState>{
     }
     render() {
       return(
-        <div className='signin-main-container'>
-          <div className='signin-content-container'>
-            <div className='signin-header'>
-              <span>Welcome to Ticker Chart</span>
-            </div>
-            <Form>
-              <div className='signin-email-container'>
-                <div className='signin-email-header'><span>Email Address</span></div>
-                <Input onChange={this.changeHandler}
-                  type='email'
-                  name='email'
-                  placeholder='johndoe@gmail.com'
-                  icon='user'
-                  iconPosition='left'
-                  style={{ width: "100%" }}/>
+        <Layout>
+          <div className='signin-main-container'>
+            <div className='signin-content-container'>
+              <div className='signin-header'>
+                <span>Welcome to Ticker Chart</span>
               </div>
-              <div className='signin-password-container'>
-                <div className='signin-password-header'>
-                  <span className='signin-password-header-primary'>Password</span>
+              <Form>
+                <div className='signin-email-container'>
+                  <div className='signin-email-header'><span>Email Address</span></div>
+                  <Input onChange={this.changeHandler}
+                    type='email'
+                    name='email'
+                    placeholder='johndoe@gmail.com'
+                    icon='user'
+                    iconPosition='left'
+                    style={{ width: "100%" }}/>
                 </div>
-                <Input onChange={this.changeHandler}
-                  icon='lock'
-                  iconPosition='left'
-                  name='password'
-                  type='password'
-                  placeholder='**********'
-                  style={{ width: "100%" }}/>
+                <div className='signin-password-container'>
+                  <div className='signin-password-header'>
+                    <span className='signin-password-header-primary'>Password</span>
+                  </div>
+                  <Input onChange={this.changeHandler}
+                    icon='lock'
+                    iconPosition='left'
+                    name='password'
+                    type='password'
+                    placeholder='**********'
+                    style={{ width: "100%" }}/>
+                </div>
+              </Form>
+              <div onClick={this.continue} className='signin-button'>
+                <span>Sign In</span>
               </div>
-            </Form>
-            <div onClick={this.continue} className='signin-button'>
-              <span>Sign In</span>
-            </div>
-            <Divider horizontal>Or</Divider>
-            <div style={{ display: "flex",justifyContent: "space-around" }}>
-              <Button color='facebook' onClick={() => AuthBackendApiService.loginWithFacebook()}>
-                <Icon name='facebook' /> Facebook
-              </Button>
-              <Button color='google plus' onClick={() => AuthBackendApiService.loginWithGoogle()}>
-                <Icon name='google' /> Google
-              </Button>
-            </div>
+              <Divider horizontal>Or</Divider>
+              <div style={{ display: "flex",justifyContent: "space-around" }}>
+                <Button color='facebook' onClick={() => AuthBackendApiService.loginWithFacebook()}>
+                  <Icon name='facebook' /> Facebook
+                </Button>
+                <Button color='google plus' onClick={() => AuthBackendApiService.loginWithGoogle()}>
+                  <Icon name='google' /> Google
+                </Button>
+              </div>
 
-            <div className='signin-not-registered'>
-              <h5>Not registered yet?</h5>
-            </div>
-            <div onClick={this.goToRegister} className='signin-register-button signin-button '>
-              <span>Register</span>
+              <div className='signin-not-registered'>
+                <h5>Not registered yet?</h5>
+              </div>
+              <div onClick={this.goToRegister} className='signin-register-button signin-button '>
+                <span>Register</span>
+              </div>
             </div>
           </div>
-        </div>
+        </Layout>
       );
     }
 }

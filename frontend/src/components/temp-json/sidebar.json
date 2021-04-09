@@ -2,7 +2,7 @@
   "data": [
     {
       "id": 1,
-      "link": "/",
+      "link": "/dashboard",
       "text": "Home",
       "icon": "home"
     },

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
-import Layout from "../components/base/Layout";
+import AdminLayout from "../components/base/AdminLayout";
 import { withRouter } from "react-router-dom";
 import { Card } from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
@@ -26,6 +26,7 @@ const Post = ()=>{
     };
     fetchStocks();
   }, []);
+
   const renderStockData = () => {
     const stockCards: Array<JSX.Element> = [];
     stocks.forEach((stock: IStock) => {
@@ -33,7 +34,7 @@ const Post = ()=>{
       const thumbnail = (stock.thumbnail === "default" || stock.thumbnail === "self") ? defaultThumbnail : stock.thumbnail;
       stockCards.push(
         <Card style={{ margin: "1rem" }}>
-          <Card.Content header={`${stock.title} `} />
+          {/*<Card.Content header={`${stock.title} `} />*/}
           <Card.Content description={`by ${stock.author}`} />
           <Card.Content extra>
             <img src={thumbnail} style={{ height: "4rem", width: "4rem", borderRadius: "50%" }} alt=""/>
@@ -48,12 +49,12 @@ const Post = ()=>{
     return stockCards;
   };
   return(
-    <Layout header='DashBoard'>
+    <AdminLayout header='DashBoard'>
       <h3>Hello from post page</h3>
       <div style={{ display: "flex", flexWrap: "wrap", margin: "1rem" }}>
         {renderStockData()}
       </div>
-    </Layout>
+    </AdminLayout>
   );
 };
 export default withRouter(Post);

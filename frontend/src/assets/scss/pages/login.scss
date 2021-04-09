@@ -3,7 +3,7 @@
   &-content-container{
     width: 40vw;
     background-color: white;
-    border: 1px solid black;
+    border: 1px solid #596cd7;
     border-radius: 40px;
     padding: 4rem;
     box-shadow: 0 0 24px 0px;
@@ -14,7 +14,7 @@
     align-items: center;
     min-height: 100vh;
     width: 100vw;
-    background-image: linear-gradient(to right, #159957 , #155799);
+  background: linear-gradient(45deg, #3f51b5 0%,#7986cb 100%)
   }
   &-header{
     display: flex;

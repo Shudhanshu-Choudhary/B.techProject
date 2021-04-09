@@ -7,7 +7,7 @@ interface IProps {
     header: string
     children: React.ReactFragment
 }
-const Layout = (props: IProps)=>{
+const AdminLayout = (props: IProps)=>{
   return(
     <div className='layout-container'>
       <div className='layout-navbar-container'>
@@ -22,4 +22,4 @@ const Layout = (props: IProps)=>{
     </div>
   );
 };
-export default Layout;
+export default AdminLayout;
