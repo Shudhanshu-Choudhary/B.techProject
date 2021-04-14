@@ -1,46 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
 import { withRouter } from "react-router-dom";
 import { Card } from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
-import Logger from "../lib/logger";
+import { StockDataContext } from "../hooks/DataContext";
 
 interface IStock {
     author: string
-    full_link: string
+    link: string
     title: string
     subreddit: string
     thumbnail: string
 }
 const PostCards = ()=>{
-  const [stocks, setStocks] = useState([]);
+  const [stocks, setStocks] = useState(null);
+  const data: any = useContext(StockDataContext);
 
-  useEffect( () => {
-    const fetchStocks = async () => {
-      // const res = await RedditBackendApiService.fetchStocksData();
-      const res = require("./temp-json/disData.json");
-      Logger.log("This is the stocks data for DIS");
-      Logger.log(res);
-      setStocks(res.data);
-    };
-    fetchStocks();
+  useEffect(() => {
+    if(!stocks) {
+      console.log("posts data", data[0].posts);
+      setStocks(data[0].posts);
+    }
   }, []);
 
   const renderStockData = () => {
     const stockCards: Array<JSX.Element> = [];
+    if(!stocks) {
+      return [];
+    }
     stocks.forEach((stock: IStock) => {
-      Logger.log(stock);
       const thumbnail = (stock.thumbnail === "default" || stock.thumbnail === "self") ? defaultThumbnail : stock.thumbnail;
       stockCards.push(
-        <Card style={{ margin: "1rem",width: "22rem",height: "12rem" }}>
-          {/*<Card.Content header={`${stock.title} `} />*/}
-          <Card.Content description={`by ${stock.author}`} />
+        <Card style={{ margin: "1rem", padding: "0.1rem", width: "22rem" }}>
+          <Card.Content>
+            <div><span style={{ fontWeight: "bold" }}>{stock.title}</span></div>
+            <span style={{ color: "#898989" }}>by {stock.author}</span>
+          </Card.Content>
           <Card.Content extra>
             <img src={thumbnail} style={{ height: "4rem", width: "5rem", borderRadius: "50%" }} alt=""/>
             <div>
               <span>Subreddit: {stock.subreddit}</span>
             </div>
-            <a href={stock.full_link} target='_blank' rel='noreferrer'>View more</a>
+            <a href={stock.link} target='_blank' rel='noreferrer'>View more</a>
           </Card.Content>
         </Card>
       );

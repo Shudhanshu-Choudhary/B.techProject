@@ -3,7 +3,6 @@ import { Form, Input } from "semantic-ui-react";
 import "../assets/scss/pages/login.scss";
 import { withRouter } from "react-router-dom";
 import AuthBackendApiService from "../services/authBackendApi.service";
-import Logger from "../lib/logger";
 import { Layout } from "./Layout";
 
 interface IState {
@@ -28,7 +27,7 @@ class Register extends React.Component<any,IState>{
 
     continue=async ()=>{
       const res = await AuthBackendApiService.register(this.state);
-      Logger.log(res);
+      console.log(res);
       this.props.history.push("/");
     }
 

@@ -1,13 +1,6 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import {
-  Icon,
-  Grid,
-  Button,
-  TextField,
-  InputAdornment,
-} from "@material-ui/core";
-import { darken } from "@material-ui/core/styles";
+import { darken, makeStyles } from "@material-ui/core/styles";
+import { Button, Grid, InputAdornment, TextField, } from "@material-ui/core";
 import FacebookIcon from "../home/common/icons/FacebookIcon";
 import TwitterIcon from "../home/common/icons/TwitterIcon";
 import InstagramIcon from "../home/common/icons/InstagramIcon";
@@ -91,7 +84,6 @@ const Footer2 = () => {
                       classes.link
                     )}
                   >
-                    <Icon>navigate_next</Icon>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -110,7 +102,6 @@ const Footer2 = () => {
                       classes.link
                     )}
                   >
-                    <Icon>navigate_next</Icon>
                     <span>{item}</span>
                   </div>
                 ))}
@@ -139,9 +130,6 @@ const Footer2 = () => {
                   },
                   startAdornment: (
                     <InputAdornment position="end">
-                      <Icon fontSize="small" className="text-white">
-                        email
-                      </Icon>
                     </InputAdornment>
                   ),
                 }}

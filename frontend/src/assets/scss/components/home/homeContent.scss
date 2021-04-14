@@ -16,7 +16,6 @@
     &-content{
       margin: 0.5rem 0;
     }
-    width: 45rem !important;
     min-height: 8rem;
     margin: 1rem !important;
     padding:  0.3rem 1rem !important;
@@ -24,6 +23,10 @@
     background-color: #ffffff;
     border-radius: 4px;
     box-shadow: 1.5px 1.5px orange;
+  }
+
+  &-barchart {
+    width: 100%;
   }
 }
 .hc-card:hover{

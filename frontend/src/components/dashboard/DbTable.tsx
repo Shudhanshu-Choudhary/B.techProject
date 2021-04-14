@@ -1,28 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Table } from "semantic-ui-react";
+import StockFormatterService from "../../services/stockFormatter.service";
 
 const DbTable = ()=>{
+  const [stocks, setStocks] = useState(null);
+  useEffect(() => {
+    if(!stocks) {
+      const data = StockFormatterService.getTopNStocks(8);
+      console.log("table data", data);
+      setStocks(data);
+    }
+  }, []);
   const renderTableBody = ()=>{
-    return(
-      <Table.Body>
-        <Table.Row>
-          <Table.Cell>NAKD</Table.Cell>
-          <Table.Cell>6</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>CCIV</Table.Cell>
-          <Table.Cell>6</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>ITRM</Table.Cell>
-          <Table.Cell>5</Table.Cell>
-        </Table.Row>
-        <Table.Row>
-          <Table.Cell>NAKD</Table.Cell>
-          <Table.Cell>0</Table.Cell>
-        </Table.Row>
-      </Table.Body>
-    );
+    const rows: JSX.Element[] = [];
+    if(!stocks) return [];
+    stocks.forEach((stock: {name: string, mentions: number}) => {
+      rows.push(<Table.Row key={stock.name}>
+        <Table.Cell>{stock.name}</Table.Cell>
+        <Table.Cell>{stock.mentions}</Table.Cell>
+      </Table.Row>);
+    });
+    return rows;
   };
   return(
     <Table celled selectable style={{ border: "0" }}>
@@ -32,7 +30,9 @@ const DbTable = ()=>{
           <Table.HeaderCell>Mentions</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
-      {renderTableBody()}
+      <Table.Body>
+        {renderTableBody()}
+      </Table.Body>
     </Table>
   );
 };

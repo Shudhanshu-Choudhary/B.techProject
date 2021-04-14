@@ -3,7 +3,6 @@ import { Button, Divider, Form, Icon, Input } from "semantic-ui-react";
 import "../assets/scss/pages/login.scss";
 import { withRouter } from "react-router-dom";
 import AuthBackendApiService from "../services/authBackendApi.service";
-import Logger from "../lib/logger";
 import { Layout } from "./Layout";
 import StorageService from "../services/storageService";
 
@@ -24,11 +23,11 @@ class Login extends React.Component<any,IState>{
     continue = async () => {
       try {
         const res = await AuthBackendApiService.login(this.state);
-        Logger.log(res);
+        console.log(res);
         StorageService.setKey("userData", JSON.stringify({ user: res.data }));
         this.props.history.push("/dashboard");
       } catch (e) {
-        Logger.log(e.response);
+        console.log(e.response);
       }
       // this.props.history.push("/");
     }

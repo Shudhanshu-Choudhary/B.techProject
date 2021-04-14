@@ -1,21 +1,29 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import DetailsCard from "../base/DetailsCard";
-import { DataContext } from "../../hooks/DataContext";
-import Logger from "../../lib/logger";
+import { StockDataContext } from "../../hooks/DataContext";
 
 const DbCards = ()=>{
-  const data:any = useContext(DataContext);
+  const data: any = useContext(StockDataContext);
+  const [stockMeta, setStockMeta] = useState(null);
+
   useEffect(()=>{
-    Logger.log(data);
-  },[]);
+    console.log(data);
+    if(data[0].stockMeta) {
+      console.log("Setting stock meta");
+      console.log(stockMeta);
+      setStockMeta(data[0].stockMeta);
+    }
+  },[data]);
 
   return(
     <div className="home-card-container">
-      <DetailsCard text={"CCIV"} header={"Most Mentioned Today"} color={"#FFF"}/>
-      <DetailsCard text={"CCIV"} header={"Most Mentioned Yesterday"} color={"#FFF"}/>
-      <DetailsCard text={"CCIV"} header={"Most Mentioned Week"} color={"#FFF"}/>
-      <DetailsCard text={"TSLA"} header={"Most Mentioned All-time"} color={"#FFF"}/>
+      {stockMeta && stockMeta.lastWeek ? (<>
+        <DetailsCard text={stockMeta.today || stockMeta.yesterday} header={"Most Mentioned Today"} color={"#FFF"}/>
+        <DetailsCard text={stockMeta.yesterday} header={"Most Mentioned Yesterday"} color={"#FFF"}/>
+        <DetailsCard text={stockMeta.lastWeek} header={"Most Mentioned Week"} color={"#FFF"}/>
+        <DetailsCard text={stockMeta.lastMonth} header={"Most Mentioned All-time"} color={"#FFF"}/></>) : "Loading"}
     </div>
   );
 };
+
 export default DbCards;

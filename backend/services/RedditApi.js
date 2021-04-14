@@ -1,9 +1,7 @@
 const axios = require('axios');
-const { Stock, TickerMeta } = require("../models");
+const { Stock, TickerMeta, Post } = require("../models");
 const { v4: uuidv4 } = require('uuid');
 const {stockToWatchList} = require('../constants')
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 
 class RedditService {
     static maxStockCount = -1;
@@ -86,10 +84,34 @@ class RedditService {
             order: [ [ 'createdAt', 'DESC' ]]
         });
         const stockMeta = await TickerMeta.findOne();
-        return {stock: stock[0], stockMeta}
+        const posts = await Post.findAll();
+        return {stock: stock[0], stockMeta, posts}
+    }
+
+    static async updatePosts() {
+        const res = await axios.get("https://api.pushshift.io/reddit/submission/search?subreddit=wallstreetbets,stocks&limit=30");
+        const postObjs = []
+        res.data.data.forEach((stock) => {
+            const {author, thumbnail, title, full_link, subreddit} = stock;
+            const postObj = {
+                id: uuidv4(),
+                author,
+                title,
+                subreddit,
+                thumbnail,
+                link: full_link
+            }
+            console.log(postObj)
+            postObjs.push(postObj)
+        })
+        await Post.destroy({where: {}});
+        const posts  =  await Post.bulkCreate(postObjs, {returning: true});
+        return posts;
+    }
+
+    static async getPosts() {
+        return await Post.findAll();
     }
 }
-// RedditService.populateStocksData().then(() => {
-//     console.log('Finnalyu')
-// })
+
 module.exports = RedditService;

@@ -1,30 +1,22 @@
 import React, { createContext, useEffect, useState } from "react";
 import DataService from "../services/data.service";
-import Logger from "../lib/logger";
 
-export const DataContext = createContext({
-  category: "",
-});
+export const StockDataContext = createContext([]);
 
-export const DataProvider = ({ children }:{children:React.ReactNode})=>{
-  const providerValue = useProvider();
-  // @ts-ignore
-  return <DataContext.Provider value={providerValue}>{children}</DataContext.Provider>;
-};
-
-const useProvider = async ()=>{
+export const StockDataProvider = ({ children }:{children:React.ReactNode})=>{
   const [data,setData] = useState({});
-  await useEffect(()=>{
+  useEffect(()=>{
     DataService.fetchData()
       .then((res)=>{
-        Logger.log("api called");
-        Logger.log(res.data);
+        console.log("api called");
+        console.log(res.data);
         setData(res.data);
       })
       .catch((err:any)=>{
-        Logger.log(err);
+        console.log(err);
       })
     ;
   },[]);
-  return data;
+  return <StockDataContext.Provider value={[data, setData]}>{children}</StockDataContext.Provider>;
 };
+

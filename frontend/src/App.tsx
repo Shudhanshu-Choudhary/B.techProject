@@ -10,14 +10,14 @@ import Home from "./pages/Home";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Theme } from "./theme";
 import GlobalCss from "./components/home/styles/jss/GlobalCss";
-import { DataProvider } from "./hooks/DataContext";
+import { StockDataProvider } from "./hooks/DataContext";
 import Posts from "./pages/Posts";
 
 function App() {
   return (
     <MuiThemeProvider theme={Theme}>
       <GlobalCss>
-        <DataProvider>
+        <StockDataProvider>
           <div className={"App"}>
             <Router>
               <div className={"app-content"}>
@@ -32,7 +32,7 @@ function App() {
               </div>
             </Router>
           </div>
-        </DataProvider>
+        </StockDataProvider>
       </GlobalCss>
     </MuiThemeProvider>
   );
