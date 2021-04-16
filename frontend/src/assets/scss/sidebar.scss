@@ -1,41 +1,100 @@
+@import "../scss/base/styling";
 
-.custom-navbar {
-  &-brand {
-    padding-right: 55rem;
-    a {
-      color: #FFF;
-      font-weight: bold;
-      font-size: 1.6rem;
-      &:hover {
-        text-decoration: none;
-        color: #FFF;
-      }
+.topbar{
+  &-main-container{
+    border-bottom: solid 3px #e9e8e8;
+    background-color: white;
+  }
+  &-banner{
+    background-color: #2766cc;
+    display: flex;
+    align-items: center;
+    padding-left: 2rem;
+    height: 3rem;
+    span{
+      @include fontStyle(1.2rem,500,#fff);
     }
   }
-  &-item {
-    color: #FFF;
-    a {
-      color: #FFF;
-      padding: 0 2rem;
-      font-size: 1.4rem;
-      &:hover {
-        text-decoration: none;
-        color: #262626;
-      }
+  &-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 8rem 1rem 8rem;
+  }
+  &-store{
+    &-container{
+      display: flex;
+      @include fontStyle(2rem,500,#8884d8);
     }
   }
-}
+  &-box {
+    display: flex;
+    &-icon {
+      img{
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        object-fit: contain;
+      }
+    }
 
-@media screen and (max-width: 768px) {
-  .custom-navbar {
-    &-item {
-      a {
-        padding: 0;
-        font-size: 1.2rem;
+    &-text {
+      margin-left: 2%;
+      &-primary {
+        span {
+          width: 3.625rem;
+          height: 1.625rem;
+          margin: 0.95rem 0.8rem 0.25rem;
+          font-size: 1.3rem;
+          font-weight: 500;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.44;
+          letter-spacing: normal;
+          color: #262626;
+        }
+      }
+      &-secondary {
+        display: flex;
+        span {
+          max-height: 3.5rem;
+          overflow: hidden;
+          margin: 0.25rem 1rem 1rem ;
+          font-size: 1rem;
+          font-weight: normal;
+          font-stretch: normal;
+          font-style: normal;
+          line-height: 1.43;
+          letter-spacing: normal;
+          color: #676767;
+        }
       }
     }
   }
-  .navbar-collapse {
-    background-color: #6876c5;
+  &-icon{
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1.4rem;
+    margin: 0 1rem;
+    img{
+      width: 1.8rem;
+      height: 1.8rem;
+      margin-right: 0.6rem;
+    }
+    span{
+      @include fontStyle(1.2rem,normal,#a8a8a8)
+    }
+    &-selected{
+      background-color: #e9eff9;
+      border-radius: 1.2rem;
+      span{
+        color: #7772df;
+        font-weight: 500;
+      }
+    }
+    &-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 }

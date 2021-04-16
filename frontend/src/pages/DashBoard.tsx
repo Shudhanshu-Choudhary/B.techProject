@@ -34,7 +34,7 @@ const DashBoard = (props: any) => {
   }
 
   return(
-    <AdminLayout header='DashBoard'>
+    <AdminLayout header='DashBoard' id={1}>
       <div className='home-main-container' style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {stock ? <>
           <DbCards/>
