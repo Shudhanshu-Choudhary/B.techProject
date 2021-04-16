@@ -1,0 +1,57 @@
+@import "../base/styling";
+
+.settings{
+  &-main-container{
+    padding: 0 10rem;
+  }
+  &-header{
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+    span{
+      @include fontStyle(1.3rem,500,#262626);
+    }
+  }
+  &-info,&-noti,&-disable{
+    &-header{
+      padding: 1rem 0;
+      border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+      span{
+        @include fontStyle(2rem,500,#d4d4d4);
+      }
+    }
+    &-profile,&-name,&-email,&-password{
+      span{
+        @include fontStyle(1.3rem,normal,#262626);
+      }
+      &-container{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+        border-bottom: solid 0.2px rgba(150, 149, 149, 0.1);
+      }
+      &-header{
+        span{
+          @include fontStyle(1.3rem,normal,#676767)
+        }
+      }
+      &-img{
+        img{
+          height: 3rem;
+        }
+      }
+    }
+    &-profile-container{
+      padding: 1.5rem 0;
+    }
+    &-password-container{
+      border: 0;
+      margin-bottom: 2rem;
+    }
+  }
+  &-button{
+    margin: 3rem auto !important;
+    @include button(20rem,3rem, #f56f6f,#fff,1.5rem);
+  }
+}

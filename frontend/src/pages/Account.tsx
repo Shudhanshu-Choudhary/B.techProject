@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
-import { Button, Card, Icon, Image } from "semantic-ui-react";
+// eslint-disable-next-line no-unused-vars
+import { Button, Card, Icon, Image, Message } from "semantic-ui-react";
 import StorageService from "../services/storageService";
 import AdminLayout from "../components/base/AdminLayout";
+import "../assets/scss/pages/account.scss";
 
 const Account = ()=>{
   const history = useHistory();
@@ -18,6 +20,11 @@ const Account = ()=>{
     googlePicture: null,
     picture: null,
   }, logInMethod: null });
+  
+  const items = [
+    "You can now have cover images on blog pages",
+    "Drafts will now auto-save while writing",
+  ];
   useEffect(() => {
     const userData = JSON.parse(StorageService.getValueFromKey("userData") as string);
     setUserData(userData);
@@ -43,28 +50,59 @@ const Account = ()=>{
       user["picture"] = userData.user.picture;
     }
     return (
-      <Card>
-        <Image src={user.picture || "https://react.semantic-ui.com/images/avatar/large/matthew.png"} wrapped ui={false} />
-        <Card.Content>
-          <Card.Header>{user.name}</Card.Header>
-          <Card.Meta>
-            <span className='date'>{user.email}</span>
-          </Card.Meta>
-          <Card.Description>
-                        Matthew is a musician living in Nashville.
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <Icon name='user' />
-                    22 Friends
-        </Card.Content>
-      </Card>);
+    // <Card>
+    //   <Image src={user.picture || "https://react.semantic-ui.com/images/avatar/large/matthew.png"} wrapped ui={false} />
+    //   <Card.Content>
+    //     <Card.Header>{user.name}</Card.Header>
+    //     <Card.Meta>
+    //       <span className='date'>{user.email}</span>
+    //     </Card.Meta>
+    //     <Card.Description>
+    //                   Matthew is a musician living in Nashville.
+    //     </Card.Description>
+    //   </Card.Content>
+    //   <Card.Content extra>
+    //     <Icon name='user' />
+    //               22 Friends
+    //   </Card.Content>
+    // </Card>
+
+      <div className='account-main-container'>
+        <div className='settings-main-container'>
+          <div className='settings-info-container'>
+            <div className='settings-info-header'>
+              <span>PERSONAL INFO</span>
+            </div>
+            <div className='settings-info-profile-container'>
+              <div className='settings-info-profile-header'><span>Profile Picture</span></div>
+              <div className='settings-info-profile-img'><img src={user.picture || "https://react.semantic-ui.com/images/avatar/large/matthew.png"} alt=''/></div>
+            </div>
+            <div className='settings-info-name-container'>
+              <div className='settings-info-name-header'><span>Name</span></div>
+              <div className='settings-info-name'><span>{user.name}</span></div>
+            </div>
+            <div className='settings-info-email-container'>
+              <div className='settings-info-email-header'><span>Email</span></div>
+              <div className='settings-info-email'><span>{user.email}</span></div>
+            </div>
+            <div className='settings-info-password-container'>
+              <div className='settings-info-password-header'><span>Password</span></div>
+              <div className='settings-info-password'><span>**********</span></div>
+            </div>
+          </div>
+          <Message>
+            <Message.List items={items} />
+          </Message>
+          <div onClick={handleLogout} className='settings-button'>
+            <span>Logout</span>
+          </div>
+        </div>
+      </div>
+    );
   };
   return(
     <AdminLayout header='Account'>
-      <h1>Settings:</h1>
       {renderUser()}
-      <Button onClick={handleLogout}>Logout</Button>
     </AdminLayout>
   );
 };

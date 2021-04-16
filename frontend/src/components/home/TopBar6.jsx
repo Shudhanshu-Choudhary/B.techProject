@@ -51,13 +51,11 @@ const TopBar6 = (props) => {
       })}
     >
       <div className="container header-container">
-        <div className="brand">
-          <img src="../../assets/img/react-logo.svg" alt="" />
+        <div className="brand" >
+          <img src="../../assets/img/react-logo.svg" alt=""
+            style={{ width: "8rem",height: "3rem" }}/>
         </div>
         <ul className="navigation">
-          <li>
-            <NavLink to="/demos">Demos</NavLink>
-          </li>
           <li>
             <ScrollTo to="intro6" onScroll={close}>
               Home
@@ -65,7 +63,7 @@ const TopBar6 = (props) => {
           </li>
           <li>
             <ScrollTo to="services8" onScroll={close}>
-              Works
+              Features
             </ScrollTo>
           </li>
           <li>
@@ -75,12 +73,7 @@ const TopBar6 = (props) => {
           </li>
           <li>
             <ScrollTo to="pricing2" onScroll={close}>
-              Service
-            </ScrollTo>
-          </li>
-          <li>
-            <ScrollTo to="blog1" onScroll={close}>
-              Blog
+              Pricing
             </ScrollTo>
           </li>
           <li>

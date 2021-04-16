@@ -8,10 +8,7 @@ import {
   Icon,
   Button,
 } from "@material-ui/core";
-import EuroIcon from "../home/common/icons/EuroIcon";
-import StarterIcon from "../home/common/icons/StarterIcon";
 import TieIcon from "../home/common/icons/TieIcon";
-import CompanyIcon from "../home/common/icons/CompanyIcon";
 
 const useStyles = makeStyles(({ palette, ...theme }) => ({
   cardWrapper: {
@@ -60,25 +57,10 @@ const Pricing2 = () => {
 
   const planList = [
     {
-      title: "Free",
-      icon: EuroIcon,
-      price: 0,
-    },
-    {
-      title: "Starter",
-      icon: StarterIcon,
-      price: 19,
-    },
-    {
       title: "Business",
       icon: TieIcon,
       price: 39,
-    },
-    {
-      title: "Ultimate",
-      icon: CompanyIcon,
-      price: 59,
-    },
+    }
   ];
 
   return (
@@ -94,47 +76,49 @@ const Pricing2 = () => {
         </div>
 
         <div className={classes.cardWrapper}>
-          <Grid container spacing={2}>
+          <Grid container spacing={2} style={{ display: "flex",justifyContent: "center" }}>
             {planList.map((plan, ind) => (
               <Grid key={ind} item lg={3} md={3} sm={6} xs={12}>
-                <Card className={classes.card} elevation={2}>
-                  <div className="flex items-center mb-6">
-                    <IconButton className="mr-4 p-3 bg-light-primary rounded hover-bg-primary">
-                      <plan.icon color="primary" fontSize="large" />
-                    </IconButton>
-                    <div>
-                      <h3 className="text-primary m-0">{plan.title}</h3>
-                      <p className="m-0">
-                        ${" "}
-                        <span className="text-32 font-medium text-primary">
-                          {plan.price}
-                        </span>
-                        /mo
-                      </p>
-                    </div>
-                  </div>
-
-                  <Divider className="bg-primary"></Divider>
-
-                  <div className="my-8">
-                    {featureList.map((item, ind) => (
-                      <div key={ind} className="flex items-center">
-                        <Icon className="mr-4" color="primary">
-                          done
-                        </Icon>
-                        <p className="my-2">{item}</p>
+                <>
+                  <Card className={classes.card} elevation={2} >
+                    <div className="flex items-center mb-6">
+                      <IconButton className="mr-4 p-3 bg-light-primary rounded hover-bg-primary">
+                        <plan.icon color="primary" fontSize="large" />
+                      </IconButton>
+                      <div>
+                        <h3 className="text-primary m-0">{plan.title}</h3>
+                        <p className="m-0">
+                          ${" "}
+                          <span className="text-32 font-medium text-primary">
+                            {plan.price}
+                          </span>
+                          /mo
+                        </p>
                       </div>
-                    ))}
-                  </div>
+                    </div>
 
-                  <Button
-                    className="rounded px-6"
-                    variant="contained"
-                    color="primary"
-                  >
-                    Buy Now
-                  </Button>
-                </Card>
+                    <Divider className="bg-primary"/>
+
+                    <div className="my-8">
+                      {featureList.map((item, ind) => (
+                        <div key={ind} className="flex items-center">
+                          <Icon className="mr-4" color="primary">
+                            done
+                          </Icon>
+                          <p className="my-2">{item}</p>
+                        </div>
+                      ))}
+                    </div>
+
+                    <Button
+                      className="rounded px-6"
+                      variant="contained"
+                      color="primary"
+                    >
+                      Buy Now
+                    </Button>
+                  </Card>
+                </>
               </Grid>
             ))}
           </Grid>
