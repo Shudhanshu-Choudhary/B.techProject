@@ -8,8 +8,19 @@ const getColumns = (Sequelize) => {
     });
     return columns;
 }
+
+require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
+console.log(`./.env.${process.env.NODE_ENV}`)
+
+const APP_URL = process.env.APP_URL;
+const SERVER_URL = process.env.SERVER_URL;
+const googleRedirectURL = SERVER_URL + '/api/v1/auth/google-cb';
+const facebookRedirectURL = SERVER_URL + '/api/v1/auth/facebook-cb';
+
 module.exports = {
-    appUrl: 'http://localhost:3000',
+    appUrl: APP_URL,
+    googleRedirectURL,
+    facebookRedirectURL,
     getColumns,
     stockToWatchList
 }

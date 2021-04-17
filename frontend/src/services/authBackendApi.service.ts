@@ -4,6 +4,7 @@ import axios from "axios";
 export default class AuthBackendApiService {
   static async login(body:object){
     const url = baseUrl + "auth/login";
+    console.log("URL IS", url);
     return axios.post(url,body);
   }
 

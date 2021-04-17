@@ -11,6 +11,8 @@ import Footer2 from "../components/home/Footer2";
 
 const Home = ()=>{
   useEffect(() => {
+    const api = process.env.REACT_APP_API_ENDPOINT;
+    console.log(api);
     scrollTo("root");
   });
   return(

@@ -4,11 +4,12 @@ const APP_SECRET = '278b96061b4db7519a2169a6adf9150f';
 const APP_ID = '1835897913230373'
 const axios = require('axios')
 const queryString = require('querystring');
+const {facebookRedirectURL} = require("../constants");
 
 const stringifiedParams = queryString.stringify({
     client_id: APP_ID,
     // redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
-    redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
+    redirect_uri: facebookRedirectURL,
     // redirect_uri: 'http://65.0.169.215:5555/api/v1/auth/facebook-cb',
     scope: ['email', 'public_profile'].join(','), // comma seperated string
     response_type: 'code',
@@ -28,7 +29,8 @@ class FacebookConnection {
             params: {
                 client_id: APP_ID,
                 client_secret: APP_SECRET,
-                redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
+                // redirect_uri: 'http://localhost:5555/api/v1/auth/facebook-cb',
+                redirect_uri: facebookRedirectURL,
                 code,
             },
         });

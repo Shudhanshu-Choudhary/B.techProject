@@ -1,5 +1,6 @@
 const axios = require('axios');
 const {google} = require('googleapis');
+const {googleRedirectURL} = require('../constants')
 const defaultScope = [
     'https://www.googleapis.com/auth/userinfo.profile',
     'https://www.googleapis.com/auth/userinfo.email'
@@ -8,12 +9,11 @@ const defaultScope = [
 const clientId = '761895649618-4mqrsrablesejvi7mm71lrcdcg6r3mp7.apps.googleusercontent.com';
 const clientSecret =  'p7jjJDrJ-7wxlYt0pZ47LteE';
 // const redirectURI = 'http://65.0.169.215:5555/api/v1/auth/google-cb';
-const redirectURI = 'http://localhost:5555/api/v1/auth/google-cb';
-
+// const redirectURI = 'http://localhost:5555/api/v1/auth/google-cb';
 const oauth2Client = new google.auth.OAuth2(
     clientId,
     clientSecret,
-    redirectURI
+    googleRedirectURL
 );
 
 class GoogleConnection {
