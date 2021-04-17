@@ -17,22 +17,22 @@ function App() {
   return (
     <MuiThemeProvider theme={Theme}>
       <GlobalCss>
-        <StockDataProvider>
-          <div className={"App"}>
-            <Router>
-              <div className={"app-content"}>
-                <Switch>
-                  <Route path='/' exact={true} component={Home}/>
-                  <Route path='/login' exact={true} component={Login}/>
-                  <Route path='/register' exact={true} component={Register}/>
+        <div className={"App"}>
+          <Router>
+            <div className={"app-content"}>
+              <Switch>
+                <Route path='/' exact={true} component={Home}/>
+                <Route path='/login' exact={true} component={Login}/>
+                <Route path='/register' exact={true} component={Register}/>
+                <StockDataProvider>
                   <Route path= '/posts' exact={true} component={Posts}/>
                   <Route path= '/account' exact={true} component={Account}/>
                   <Route path= '/dashboard' exact={true} component={DashBoard}/>
-                </Switch>
-              </div>
-            </Router>
-          </div>
-        </StockDataProvider>
+                </StockDataProvider>
+              </Switch>
+            </div>
+          </Router>
+        </div>
       </GlobalCss>
     </MuiThemeProvider>
   );
