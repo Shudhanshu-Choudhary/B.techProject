@@ -1,7 +1,6 @@
-import React,{ useEffect } from "react";
+import React, { useEffect } from "react";
 import { scrollTo } from "../components/base/utils";
 import Intro6 from "../components/home/Intro6";
-import Marketing1 from "../components/home/Marketing1";
 import Services8 from "../components/home/Services8";
 import TopBar6 from "../components/home/TopBar6";
 import Testimonial6 from "../components/home/Testimonial6";
@@ -20,7 +19,6 @@ const Home = ()=>{
       <TopBar6 />
       <Intro6 />
       <Services8 />
-      <Marketing1 />
       <Testimonial6 />
       <Pricing2 />
       <Subscription1 />

@@ -1,6 +1,8 @@
+
 const { User } = require("../models");
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
+const EmailService = require("./EmailService");
 
 class UserService {
     static async createUser(userParams) {
@@ -37,6 +39,7 @@ class UserService {
             if(!passwordMatch) {
                 return 'Invalid password'
             }
+            EmailService.sendEmail(user.email)
             return user;
         }
         catch (e) {
