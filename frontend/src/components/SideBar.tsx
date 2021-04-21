@@ -1,9 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import defaultbagIcon from "../../assets/images/Navbar icons/defaultbagIcon.png";
-// import selectedbagIcon from "../../assets/images/Navbar icons/selectedBagIcon.png";
-// import defaultAccountIcon from "../../assets/images/Navbar icons/defaultAccountIcon.png";
-// import selectedAccountIcon from "../../assets/images/Navbar icons/selectedOrderIcon.png";
 import "../assets/scss/sidebar.scss";
 import { NavLink } from "react-router-dom";
 
@@ -11,8 +7,10 @@ const Topbar = (props:any)=>{
   let id = props.id;
   const topbarData = [
     { id: 1,text: "DashBoard",link: "/dashboard" },
-    { id: 2,text: "Posts",link: "/posts" },
-    { id: 3,text: "Account", link: "/account" }];
+    { id: 2,text: "Picks",link: "/picks" },
+    { id: 3,text: "Posts",link: "/posts" },
+    { id: 4,text: "Account", link: "/account" }
+  ];
 
   const renderTopBar = ()=>{
     const topbarIcons:any = [];

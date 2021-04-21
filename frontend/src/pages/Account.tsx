@@ -96,6 +96,7 @@ const Account = ()=>{
           <div onClick={handleLogout} className='settings-button'>
             <span>Logout</span>
           </div>
+          <button type="button" id="checkout-button">Checkout</button>
         </div>
       </div>
     );
