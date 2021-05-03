@@ -3,12 +3,12 @@ const { User } = require("../models");
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const EmailService = require("./EmailService");
+const {AuthenticationUtil} = require("./JWTService");
 
 class UserService {
     static async createUser(userParams) {
         try {
             const {name, email, password} = userParams;
-            console.log('These are the user params');
             const passwordHash = await bcrypt.hash(password, 10);
             console.log(userParams);
             return await User.create({
@@ -47,6 +47,7 @@ class UserService {
             console.log(e);
         }
     }
+
     static async handleGoogleLogin(googleUser) {
         try {
             let user = await User.findOne({where: {googleId: googleUser.id}})
@@ -65,6 +66,7 @@ class UserService {
             return e;
         }
     }
+
     static async handleFacebookLogin(facebookUser) {
         try {
             let user = await User.findOne({where: {facebookId: facebookUser.id}})
@@ -84,39 +86,17 @@ class UserService {
         }
     }
 
-    static async getUserById(id) {
+    static async updateUserPicks(token , {stockPicks}) {
         try {
-            const user = await User.findByPk(id);
+            let jwtData = await AuthenticationUtil.getUserFromJWTToken(token)
+            let user = jwtData.user;
             if(!user) return null;
-            return user;
-        } catch (e) {
-            console.log('error occurred')
-            return e;
-        }
-    }
-
-    static async saveBuild(buildDetails) {
-        try {
-            const user = await User.findByPk(buildDetails.userId);
-            if(!user) return null;
-            const builds = JSON.parse(user.builds) || {};
-            builds[buildDetails.identifier] = buildDetails.skillMap;
-            user.builds = JSON.stringify(builds);
+            user.stockPicks = stockPicks;
             await user.save();
             console.log('Updated user')
-            console.log(user);
             return user;
         } catch (e) {
-            console.log('error occurred')
-            return e;
-        }
-    }
-
-    static async getUserByDiscordId(discordId) {
-        try {
-            const user = await User.findOne({where: {discordId}})
-            return user;
-        } catch (e) {
+            console.log(e)
             console.log('error occurred')
             return e;
         }

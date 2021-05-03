@@ -5,6 +5,8 @@ const app = express();
 var cookieParser = require('cookie-parser');
 const RedditService = require("./services/RedditApi");
 const TickerMetaService = require("./services/TickerMetaService");
+const UserService = require("./services/UserService");
+const StripeService = require("./services/StripeService");
 const {AuthenticationUtil} = require("./services/JWTService");
 const authRouter = require('./controllers/api/v1/auth.controller').authRouter;
 
@@ -75,6 +77,14 @@ app.get('/api/v1/posts', async (req,res) => {
 app.get('/api/v1/update-posts', async (req, res) => {
     const posts = await RedditService.updatePosts();
     res.status(200).send(posts)
+})
+app.put('/api/v1/update-picks', async (req, res) => {
+    const token = req.headers.token;
+    const user = await UserService.updateUserPicks(token ,req.body);
+    res.send(user);
+})
+app.post('/api/v1/create-checkout-session', async (req, res) => {
+    await StripeService.payment(res);
 })
 app.listen(PORT, () => {
     console.log("The server started on port " + PORT);

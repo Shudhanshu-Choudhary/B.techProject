@@ -11,8 +11,8 @@ class RedditService {
 
     static async updateDate(date) {
         // this.currDate = date
-        this.currDate = '2021-03-31';
-        // this.currDate = new Date().toISOString().slice(0,10);
+        // this.currDate = '2021-03-31';
+        this.currDate = new Date().toISOString().slice(0,10);
     }
     static async getStock(i) {
         const stock = stockToWatchList[i];
@@ -64,6 +64,7 @@ class RedditService {
                 RedditService.maxStockCount = null;
                 RedditService.maxStockName = null;
                 console.log('Before resolve')
+                this.updatePosts()
                 resolve()
             }).catch((e) => {
                 reject(e);

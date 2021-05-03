@@ -11,9 +11,14 @@ import StorageService from "../services/storageService";
 
 const Picks = () => {
   const [userPicks, setUserPicks] = useState([]);
+
   useEffect(() => {
     const userData = JSON.parse(StorageService.getValueFromKey("userData") as string);
-    setUserPicks(userData.stockPicks || []);
+    console.log(userData);
+    console.log(userData.user.stockPicks);
+    setUserPicks(userData.user.stockPicks || []);
+    console.log(userPicks);
+
   }, []);
 
   const saveUserPicks = async () => {

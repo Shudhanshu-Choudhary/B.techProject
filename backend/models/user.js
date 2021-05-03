@@ -28,7 +28,8 @@ module.exports = (sequelize, DataTypes) => {
     facebookId: DataTypes.STRING,
     facebookName: DataTypes.STRING,
     facebookEmail: DataTypes.STRING,
-    facebookPicture: DataTypes.TEXT
+    facebookPicture: DataTypes.TEXT,
+    stockPicks: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     sequelize,
     modelName: 'User',
