@@ -8,6 +8,7 @@ import StorageService from "../services/storageService";
 import AuthBackendApiService from "../services/authBackendApi.service";
 import { StockDataContext } from "../hooks/DataContext";
 import StockFormatterService from "../services/stockFormatter.service";
+import DbHeader from "../components/dashboard/DbHeader";
 
 const DashBoard = (props: any) => {
   const query = new URLSearchParams(props.location.search);
@@ -37,6 +38,7 @@ const DashBoard = (props: any) => {
     <AdminLayout header='DashBoard' id={1}>
       <div className='home-main-container' style={{ maxWidth: "1200px", margin: "0 auto" }}>
         {stock ? <>
+          <DbHeader/>
           <DbCards/>
           <DbContent/>
         </> : null }

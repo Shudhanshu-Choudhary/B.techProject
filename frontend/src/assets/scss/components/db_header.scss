@@ -1,0 +1,54 @@
+.dashboard-header {
+  &-options {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 3rem auto;
+  }
+  &-option {
+    &-container {
+      border: 1px solid gray;
+      width: 25% !important;
+      text-align: center;
+    }
+    &-header {
+      margin: 0.5rem 1rem;
+    }
+    &-choices {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1px;
+      justify-content: center;
+      padding: 0 !important;
+      & button {
+        margin: 0 !important;
+        padding: 0 !important;
+        height: 45px;
+      }
+    }
+    &-choice {
+      margin: 0 !important;
+      padding: 0 !important;
+      background-color: #8884d8 !important;
+      width: 48%;
+      & button {
+        margin: 0 !important;
+      }
+      h4 {
+        color: white;
+      }
+    }
+  }
+  &-dashboard-options, &-stat-options, &-type-options {
+    height: 100px;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  &-stat-options {
+    width: 35% !important;
+      & button {
+        width: 33% !important;
+      }
+  }
+}
