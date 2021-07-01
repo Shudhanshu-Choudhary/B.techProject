@@ -3,7 +3,7 @@ const UserService = require('../../../services/UserService');
 const GoogleConnection = require('../../../connections/google');
 const FacebookConnection = require("../../../connections/facebook");
 const constants = require('../../../constants')
-const {AuthenticationUtil} = require("../../../services/JWTService");
+const JWTService = require("../../../services/JWTService");
 const authRouter = express.Router();
 
 authRouter.get('/login/google', async (req, res) => {
@@ -26,7 +26,7 @@ authRouter.get('/google-cb', async (req, res) => {
     //   locale: 'en-GB'
     // }
     const user = await UserService.handleGoogleLogin(googleUser)
-    const token = await AuthenticationUtil.generateJWTToken(user, 'google');
+    const token = await JWTService.generateJWTToken(user, 'google');
     const url = `${constants.appUrl}/dashboard?token=${token}`
     res.redirect(url);
 });
@@ -56,7 +56,7 @@ authRouter.get('/facebook-cb', async (req, res) => {
     //   }
     // }
     const user = await UserService.handleFacebookLogin(facebookUser)
-    const token = await AuthenticationUtil.generateJWTToken(user, 'facebook');
+    const token = await JWTService.generateJWTToken(user, 'facebook');
     const url = `${constants.appUrl}/dashboard?token=${token}`
     res.redirect(url);
 });
@@ -70,11 +70,13 @@ authRouter.post('/register', async (req, res) => {
 authRouter.post('/login', async (req, res) => {
     const body = req.body;
     const user = await UserService.login(body);
+    const token = await JWTService.generateJWTToken(user, 'facebook');
+
     if(user === 'Invalid email') {
         res.status(400).send(('Invalid email'));
     } else if(user === 'Invalid password') {
         res.status(400).send(('Invalid password'));
-    } else res.status(200).send(user);
+    } else res.status(200).send({user, token});
 })
 
 module.exports = {authRouter};

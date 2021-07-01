@@ -3,7 +3,7 @@ const { User } = require("../models");
 const { v4: uuidv4 } = require('uuid');
 const bcrypt = require('bcryptjs');
 const EmailService = require("./EmailService");
-const {AuthenticationUtil} = require("./JWTService");
+const JWTService = require("./JWTService");
 
 class UserService {
     static async createUser(userParams) {
@@ -39,7 +39,8 @@ class UserService {
             if(!passwordMatch) {
                 return 'Invalid password'
             }
-            EmailService.sendEmail(user.email)
+            //TODO: Fix email logic
+            // EmailService.sendEmail(user.email)
             return user;
         }
         catch (e) {
@@ -86,11 +87,10 @@ class UserService {
         }
     }
 
-    static async updateUserPicks(token , {stockPicks}) {
+    static async updateUserPicks(currentUser , {stockPicks}) {
         try {
-            let jwtData = await AuthenticationUtil.getUserFromJWTToken(token)
-            let user = jwtData.user;
-            if(!user) return null;
+            const user = await User.findByPk(currentUser.id);
+            if(!user) return 'User not found';
             user.stockPicks = stockPicks;
             await user.save();
             console.log('Updated user')

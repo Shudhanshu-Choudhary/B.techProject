@@ -1,6 +1,7 @@
 import React from "react";
 import "../../assets/scss/components/db_header.scss";
 import { Card, Button } from "semantic-ui-react";
+import DashboardBackendApiService from "../../services/dashboardBackendApi.service";
 
 const DbHeader = () => {
   return(
@@ -12,7 +13,7 @@ const DbHeader = () => {
           </div>
           <Card.Content className={"dashboard-header-option-choices"}>
             <Button className={"dashboard-header-option-choice"}><h4>Overall</h4></Button>
-            <Button className={"dashboard-header-option-choice"}><h4>MyPicks</h4></Button>
+            <Button className={"dashboard-header-option-choice"} onClick={() => DashboardBackendApiService.getData()}><h4>MyPicks</h4></Button>
           </Card.Content>
         </Card>
         <Card className={"dashboard-header-option-container dashboard-header-stat-options"}>

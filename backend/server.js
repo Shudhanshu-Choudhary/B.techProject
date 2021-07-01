@@ -7,25 +7,26 @@ const RedditService = require("./services/RedditApi");
 const TickerMetaService = require("./services/TickerMetaService");
 const UserService = require("./services/UserService");
 const StripeService = require("./services/StripeService");
+const authMiddleware = require("./middleware/auth.middleware");
 const {AuthenticationUtil} = require("./services/JWTService");
 const authRouter = require('./controllers/api/v1/auth.controller').authRouter;
+const userRouter = require('./controllers/api/v1/user.controller').userRouter;
+const dashboardRouter = require('./controllers/api/v1/dashboard.controller').dashboardRouter;
 
 app.use(cors());
 app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(authMiddleware);
 const PORT = process.env.PORT || 5555;
 
 app.use('/api/v1/auth',authRouter);
+app.use('/api/v1/user',userRouter);
+app.use('/api/v1/dashboard',dashboardRouter);
 
 app.get('/', (req, res) => {
     res.status(201).send('Server on');
-});
-
-app.get('/api/v1/stocks-data', async (req,res) => {
-    const stocksData = await RedditService.fetchStockData();
-    res.status(200).send(stocksData)
 });
 
 app.get('/api/v1/populate-data', async (req, res) => {

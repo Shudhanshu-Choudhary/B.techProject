@@ -5,7 +5,7 @@ const { User } = require("../models");
 
 const JWT_SECRET = '04i-293u4-0234';
 
-class AuthenticationUtil {
+class JWTService {
     static validJWTS = {};
 
     static generateJWTToken(user, logInMethod) {
@@ -43,8 +43,8 @@ class AuthenticationUtil {
             // if (expireAt < moment().toISOString()) { // if expiredAt is lesser than current time
             //     return null;
             // }
-            const user = await User.findByPk(userId);
-            return {user, logInMethod};
+            const user = await User.findByPk(userId, {raw: true});
+            return user;
 
         } catch (e) {
             return null;
@@ -52,6 +52,4 @@ class AuthenticationUtil {
     }
 }
 
-module.exports = {
-    AuthenticationUtil
-}
+module.exports = JWTService

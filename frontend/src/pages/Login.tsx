@@ -24,7 +24,8 @@ class Login extends React.Component<any,IState>{
       try {
         const res = await AuthBackendApiService.login(this.state);
         console.log(res);
-        StorageService.setKey("userData", JSON.stringify({ user: res.data }));
+        StorageService.setKey("userData", JSON.stringify({ user: res.data.user }));
+        StorageService.setKey("token", res.data.token);
         this.props.history.push("/dashboard");
       } catch (e) {
         console.log(e.response);
