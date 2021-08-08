@@ -9,6 +9,7 @@ const UserService = require("./services/UserService");
 const StripeService = require("./services/StripeService");
 const authMiddleware = require("./middleware/auth.middleware");
 const {AuthenticationUtil} = require("./services/JWTService");
+const JWTService = require("./services/JWTService");
 const authRouter = require('./controllers/api/v1/auth.controller').authRouter;
 const userRouter = require('./controllers/api/v1/user.controller').userRouter;
 const dashboardRouter = require('./controllers/api/v1/dashboard.controller').dashboardRouter;
@@ -18,10 +19,11 @@ app.use(cookieParser());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(authMiddleware);
+
 const PORT = process.env.PORT || 5555;
 
 app.use('/api/v1/auth',authRouter);
+app.use(authMiddleware);
 app.use('/api/v1/user',userRouter);
 app.use('/api/v1/dashboard',dashboardRouter);
 
@@ -50,7 +52,7 @@ app.get('/api/v1/update-meta', async (req, res) => {
 
 app.get('/api/v1/user', async (req,res) => {
     const token = req.query.token;
-    const user = await AuthenticationUtil.getUserFromJWTToken(token)
+    const user = await JWTService.getUserFromJWTToken(token)
     console.log(user)
     res.status(200).send(user)
 });

@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
 import StockFormatterService from "../../services/stockFormatter.service";
 import { AutoSizer } from "react-virtualized";
+import { useSelector } from "react-redux";
+import { RootState } from "../../index";
 
 const DbBarChart = ()=>{
   // const data: any = useContext(StockDataContext);
+  const stocks2 = useSelector((state: RootState) => state.dashboard.stockData);
   const [stocks, setStocks] = useState(null);
 
   useEffect(()=>{
@@ -13,10 +16,13 @@ const DbBarChart = ()=>{
       console.log("bar chart data", stocksData);
       setStocks(stocksData);
     }
-  },[
+  },[]);
+  // useEffect(() => {
+  //   StockFormatterService.convertStocksToArray(stocks2);
+  // }, [stocks2]);
 
-  ]);
-
+  console.log("stocks2");
+  console.log(stocks2);
   return(
     <AutoSizer>
       {({ height, width }) => (

@@ -1,0 +1,21 @@
+.picks {
+  &-container {
+    width: 50%;
+    margin: 5rem auto;
+    text-align: center;
+  }
+  &-input-box {
+    width: 100%;
+    text-align: center;
+  }
+  &-input {
+    width: 400px;
+    margin: 0 auto;
+  }
+  &-selected-item {
+    width: 400px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px auto;
+  }
+}

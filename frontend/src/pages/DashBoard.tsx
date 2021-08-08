@@ -12,7 +12,7 @@ import DbHeader from "../components/dashboard/DbHeader";
 
 const DashBoard = (props: any) => {
   const query = new URLSearchParams(props.location.search);
-  const token = query.get("token");
+  const token = query.get("token") || StorageService.getValueFromKey("token");
 
   const data: any = useContext(StockDataContext);
   const [stock, setStock] = useState(null);
@@ -29,10 +29,13 @@ const DashBoard = (props: any) => {
     const userData = JSON.stringify(user.data);
     StorageService.setKey("userData", userData);
   };
-  if (token != null) {
-    getUser();
-    StorageService.setKey("token", token);
-  }
+
+  useEffect(() => {
+    if (token) {
+      StorageService.setKey("token", token);
+      getUser();
+    }
+  }, []);
 
   return(
     <AdminLayout header='DashBoard' id={1}>

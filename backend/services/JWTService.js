@@ -44,8 +44,9 @@ class JWTService {
             //     return null;
             // }
             const user = await User.findByPk(userId, {raw: true});
+            console.log('token is', jwtToken)
+            console.log('user is', user)
             return user;
-
         } catch (e) {
             return null;
         }
