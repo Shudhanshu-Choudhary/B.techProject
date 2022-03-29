@@ -6,14 +6,19 @@ import { useSelector } from "react-redux";
 
 const DbLineChart = () => {
   const [stocks, setStocks] = useState(null);
-  const stocksArr = useSelector((state: any) => state.dashboard.allStocks);
+  const { allStocks } = useSelector((state: any) => {
+    const allStocks = state.dashboard.stockData.stock;
+    return {
+      allStocks,
+    }
+  });
   useEffect(() => {
-    if (stocksArr) {
-      const data = StockFormatterService.getTopNStocks(stocksArr,8);
-      console.log("line data", data);
+    if (allStocks) {
+      const parsedStockArr = StockFormatterService.convertStocksToArray(allStocks);
+      const data = StockFormatterService.getTopNStocks(parsedStockArr,8);
       setStocks(data);
     }
-  }, [stocksArr]);
+  }, [allStocks]);
   return (
     <AutoSizer>
       {({ height, width }) => (

@@ -1,4 +1,4 @@
-import { STOCK_NAME_LIST } from "../constant";
+import {STOCK_NAME_LIST} from "../constant";
 
 class StockFormatterService {
   static convertStocksToArray(stockData: any) {
@@ -13,11 +13,8 @@ class StockFormatterService {
   }
 
   static getTopNStocks(allStocks: any, n: number): any {
-    //allStocks.sort((a, b) => b.mentions - a.mentions);
-    console.log(allStocks, n);
-    return [];
-    // const topNStocks = allStocks.slice(0, n);
-    // return topNStocks;
+    allStocks.sort((a: any, b: any) => b.mentions - a.mentions);
+    return allStocks.slice(0, n);
   }
 }
 

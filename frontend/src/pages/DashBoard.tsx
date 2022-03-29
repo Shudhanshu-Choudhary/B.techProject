@@ -8,7 +8,7 @@ import StorageService from "../services/storageService";
 import DataService from "../services/data.service";
 import AuthBackendApiService from "../services/authBackendApi.service";
 import DbHeader from "../components/dashboard/DbHeader";
-import { setPickData, setStockData } from "../state/reducers/dashboardReducer";
+import { setStockData } from "../state/reducers/dashboardReducer";
 import { useDispatch } from "react-redux";
 
 const DashBoard = (props: any) => {
@@ -26,7 +26,6 @@ const DashBoard = (props: any) => {
       if(data.stock) {      
         setIsStocksAvailable(true);
         dispatch(setStockData(data));
-        dispatch(setPickData(data));
       }
     });
   },[]);

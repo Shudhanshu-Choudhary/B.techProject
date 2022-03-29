@@ -1,21 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Card, Feed } from "semantic-ui-react";
+import {useSelector} from "react-redux";
 
 const DbTweets = ()=>{
-  const [stocks, setStocks] = useState(null);
-  const data: any = [];
-
-  useEffect(() => {
-    if(stocks) { // TODO it was !stocks
-      console.log("posts data", data[0].posts);
-      setStocks(data[0].posts.slice(1, 4));
+  const [topPosts, setTopPosts] = useState(null);
+  const { allPosts } = useSelector((state: any) => {
+    const allPosts = state.dashboard.stockData.posts;
+    return {
+      allPosts,
     }
-  }, []);
+  });
+  useEffect(() => {
+    if (allPosts) {
+      setTopPosts(allPosts.slice(0, 4));
+    }
+  }, [allPosts]);
 
   return(
     <Card.Content>
       <Feed>
-        { stocks && stocks.map((stock: any) => {
+        { topPosts && topPosts.map((stock: any) => {
           return (
             <Feed.Event key={stock.title}>
               <Feed.Content className='hc-card-content'>

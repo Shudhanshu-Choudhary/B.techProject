@@ -23,17 +23,25 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#1aff00", "#FF8042", ];
 
 const DbPieChart = () => {
 
-  const allStocks = useSelector((state: RootState) => state.dashboard.stockData);
+  const {allStocks} = useSelector((state: RootState) => {
+    const allStocks = state.dashboard.stockData.stock;
+    console.log({allStocks});
+    return {
+      allStocks,
+    }
+  });
 
   const [stocks, setStocks] = useState(null);
   
   useEffect(() => {
     if(allStocks) {
-      const data = StockFormatterService.getTopNStocks(allStocks, 5);
+      const parsedStockArr = StockFormatterService.convertStocksToArray(allStocks);
+      console.log('all Stocks, ', {allStocks, parsedStockArr});
+      const data = StockFormatterService.getTopNStocks(parsedStockArr, 5);
       console.log("pie data", data);
       setStocks(data);
     }
-  }, []);
+  }, [allStocks]);
   
   return (
 

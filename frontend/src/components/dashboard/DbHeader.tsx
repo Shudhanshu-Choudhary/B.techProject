@@ -4,31 +4,26 @@ import "../../assets/scss/components/db_header.scss";
 import { Button } from "@material-ui/core";
 import DashboardBackendApiService from "../../services/dashboardBackendApi.service";
 // import StockFormatterService from "../../services/stockFormatter.service";
-import { useDispatch, useSelector } from "react-redux";
-import { setPickData } from "../../state/reducers/dashboardReducer";
+import { useDispatch } from "react-redux";
+import {setStockData} from "../../state/reducers/dashboardReducer";
 import DataService from "../../services/data.service";
 
 const DbHeader = () => {
 
   const dispatch = useDispatch();
-  const count = useSelector((state: any) => state.dashboard);
-  
+
   const myPicksClickHandler = async () => {
     const { status, data } = await DashboardBackendApiService.getData();
-    console.log(status, count);
 
     if(status === 200) {
-      console.log(status,data.stock);
-      dispatch(setPickData(data));
-      // StockFormatterService.convertStocksToArray(data);
+      dispatch(setStockData(data));
     }
   };
 
   const overallClickHandler = async () => {
     DataService.fetchData().then((response: any) => {
       const data = response.data;
-      console.log(data);
-      dispatch(setPickData(data));
+      dispatch(setStockData(data));
     });
   };
 
