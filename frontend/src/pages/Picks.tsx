@@ -7,17 +7,13 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import { TextField, Button } from "@material-ui/core";
 import { STOCK_NAME_LIST } from "../constant";
 import UserService from "../services/user.service";
-import StorageService from "../services/storageService";
 import { Icon } from "semantic-ui-react";
 
 const Picks = () => {
   const [userPicks, setUserPicks] = useState([]);
 
   useEffect(() => {
-    const userData = JSON.parse(StorageService.getValueFromKey("userData") as string);
-    console.log(userData);
-    setUserPicks(userData.stockPicks || []);
-    console.log(userPicks);
+    getUserPicks();
   }, []);
 
   const saveUserPicks = async () => {
@@ -25,11 +21,19 @@ const Picks = () => {
     console.log(res);
   };
 
+  const getUserPicks = async () => {
+    const response = await UserService.getUserPicks();
+    if (Array.isArray(response.data)) {
+      setUserPicks(response.data);
+    } else {
+      setUserPicks([]);
+    }
+  };
   const renderPicks = () => {
     const picks: JSX.Element[] = [];
     userPicks.forEach((pick, index) => {
       picks.push(
-        <div className='picks-selected-item'>
+        <div className='picks-selected-item' key={index}>
           <span>{pick}</span>
           <Icon className='transform-icon' name='delete' color='red' size='large' onClick={() => deletePicks(index)}/>
         </div>
@@ -48,6 +52,7 @@ const Picks = () => {
     const updatedPicks = userPicks.slice();
     updatedPicks.splice(index, 1);
     setUserPicks(updatedPicks);
+
   };
 
   return(
@@ -64,7 +69,7 @@ const Picks = () => {
           />
         </div>
         {userPicks && userPicks.length ? renderPicks() : "No user picks"}
-        <Button onClick={saveUserPicks}>Save</Button>
+        <Button onClick={saveUserPicks} variant="contained" color="primary">Save</Button>
       </div>
     </AdminLayout>
   );

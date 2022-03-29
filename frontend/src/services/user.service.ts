@@ -10,6 +10,13 @@ class UserService {
       token: StorageService.getValueFromKey("token")
     } });
   }
+  static async getUserPicks() {
+    const url = baseUrl + "user/picks";
+    console.log("URL IS", url);
+    return axios.get(url, { headers: {
+      token: StorageService.getValueFromKey("token")
+    } });
+  }
 }
 
 export default UserService;

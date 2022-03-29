@@ -39,14 +39,15 @@ class JWTService {
     static async getUserFromJWTToken(jwtToken){
         try {
             const decoded = JWT.verify(jwtToken, JWT_SECRET);
+            console.log(decoded);
             const {userId, expireAt, logInMethod} = decoded;
             // if (expireAt < moment().toISOString()) { // if expiredAt is lesser than current time
             //     return null;
             // }
             const user = await User.findByPk(userId, {raw: true});
             console.log('token is', jwtToken)
-            console.log('user is', user)
-            return user;
+            console.log('users is', user)
+            return {user , logInMethod};
         } catch (e) {
             return null;
         }

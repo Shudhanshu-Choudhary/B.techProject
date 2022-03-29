@@ -17,7 +17,7 @@ export const dashboardSlice = createSlice({
       state.value -= 1;
     },
     setStockData: (state, action) => {
-      console.log(action.payload);
+      console.log({ payload: action.payload });
       state.stockData = action.payload;
     },
     incrementByAmount: (state, action) => {

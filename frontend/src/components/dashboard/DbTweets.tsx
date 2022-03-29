@@ -1,13 +1,12 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Feed } from "semantic-ui-react";
-import { StockDataContext } from "../../hooks/DataContext";
 
 const DbTweets = ()=>{
   const [stocks, setStocks] = useState(null);
-  const data: any = useContext(StockDataContext);
+  const data: any = [];
 
   useEffect(() => {
-    if(!stocks) {
+    if(stocks) { // TODO it was !stocks
       console.log("posts data", data[0].posts);
       setStocks(data[0].posts.slice(1, 4));
     }

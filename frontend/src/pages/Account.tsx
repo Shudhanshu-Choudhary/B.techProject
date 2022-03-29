@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
+
 // eslint-disable-next-line no-unused-vars
 import { Button, Card, Icon, Image, Message } from "semantic-ui-react";
 import StorageService from "../services/storageService";
@@ -27,7 +28,9 @@ const Account = ()=>{
   ];
   useEffect(() => {
     const userData = JSON.parse(StorageService.getValueFromKey("userData") as string);
-    setUserData(userData);
+    // const logInData = JWTService.getUserFromJWTToken()
+    setUserData({   user: userData.user , logInMethod: userData.logInMethod });
+    console.log(userData.logInMethod);
   }, []);
 
   const handleLogout = () => {
@@ -36,19 +39,23 @@ const Account = ()=>{
   };
   const renderUser = () => {
     const user: any = {};
-    if(userData.logInMethod && userData.logInMethod.toLowerCase() === "facebook") {
-      user["name"] = userData.user.facebookName;
-      user["email"] = userData.user.facebookEmail;
-      user["picture"] = userData.user.facebookPicture;
-    } else if(userData.logInMethod && userData.logInMethod.toLowerCase() === "google") {
-      user["name"] = userData.user.googleName;
-      user["email"] = userData.user.googleEmail;
-      user["picture"] = userData.user.googlePicture;
+
+    if(userData.logInMethod === "facebook") {
+      user.name = userData.user.facebookName;
+      user.email = userData.user.facebookEmail;
+      user.picture = userData.user.facebookPicture;
+    } else if(userData.logInMethod === "google") {
+      user.name = userData.user.googleName;
+      user.email = userData.user.googleEmail;
+      user.picture = userData.user.googlePicture;
     } else {
-      user["name"] = userData.user.name;
-      user["email"] = userData.user.email;
-      user["picture"] = userData.user.picture;
+      user.name = userData.user.name;
+      user.email = userData.user.email;
+      user.picture = userData.user.picture;
     }
+    console.log(user);
+    console.log(userData);
+    
     return (
     // <Card>
     //   <Image src={user.picture || "https://react.semantic-ui.com/images/avatar/large/matthew.png"} wrapped ui={false} />

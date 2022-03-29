@@ -22,14 +22,16 @@ app.use(bodyParser.json());
 
 const PORT = process.env.PORT || 5555;
 
-app.use('/api/v1/auth',authRouter);
-app.use(authMiddleware);
-app.use('/api/v1/user',userRouter);
-app.use('/api/v1/dashboard',dashboardRouter);
-
 app.get('/', (req, res) => {
     res.status(201).send('Server on');
 });
+
+app.use('/api/v1/auth',authRouter);
+
+app.use(authMiddleware);
+
+app.use('/api/v1/user',userRouter);
+app.use('/api/v1/dashboard/',dashboardRouter);
 
 app.get('/api/v1/populate-data', async (req, res) => {
     try {
@@ -81,9 +83,9 @@ app.get('/api/v1/update-posts', async (req, res) => {
     const posts = await RedditService.updatePosts();
     res.status(200).send(posts)
 })
-app.put('/api/v1/update-picks', async (req, res) => {
-    const token = req.headers.token;
-    const user = await UserService.updateUserPicks(token ,req.body);
+
+app.get('/api/v1/user/picks', async (req, res) => {
+    const user = await UserService.getUserPicks(req.user);
     res.send(user);
 })
 app.post('/api/v1/create-checkout-session', async (req, res) => {

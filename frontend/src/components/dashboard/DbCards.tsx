@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DetailsCard from "../base/DetailsCard";
-import { StockDataContext } from "../../hooks/DataContext";
 
 const DbCards = ()=>{
-  const data: any = useContext(StockDataContext);
   const [stockMeta, setStockMeta] = useState(null);
-
+  const data = [{ stockMeta: false }];
   useEffect(()=>{
     console.log(data);
     if(data[0].stockMeta) {

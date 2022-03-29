@@ -89,12 +89,25 @@ class UserService {
 
     static async updateUserPicks(currentUser , {stockPicks}) {
         try {
-            const user = await User.findByPk(currentUser.id);
+            console.log(stockPicks);
+            const user = await User.findByPk(currentUser.user.id);
             if(!user) return 'User not found';
             user.stockPicks = stockPicks;
             await user.save();
             console.log('Updated user')
             return user;
+        } catch (e) {
+            console.log(e)
+            console.log('error occurred')
+            return e;
+        }
+    }
+
+    static async getUserPicks(currentUser) {
+        try {
+            const user = await User.findByPk(currentUser.user.id);
+            if(!user) return 'User not found';
+            return user.stockPicks;
         } catch (e) {
             console.log(e)
             console.log('error occurred')

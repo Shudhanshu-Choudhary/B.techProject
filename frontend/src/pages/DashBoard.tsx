@@ -1,28 +1,33 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
 import DbCards from "../components/dashboard/DbCards";
 import DbContent from "../components/dashboard/DbContent";
 import AdminLayout from "../components/base/AdminLayout";
 import { withRouter } from "react-router-dom";
 import StorageService from "../services/storageService";
+import DataService from "../services/data.service";
 import AuthBackendApiService from "../services/authBackendApi.service";
-import { StockDataContext } from "../hooks/DataContext";
-import StockFormatterService from "../services/stockFormatter.service";
 import DbHeader from "../components/dashboard/DbHeader";
+import { setStockData } from "../state/reducers/dashboardReducer";
+import { useDispatch } from "react-redux";
 
 const DashBoard = (props: any) => {
   const query = new URLSearchParams(props.location.search);
   const token = query.get("token") || StorageService.getValueFromKey("token");
 
-  const data: any = useContext(StockDataContext);
-  const [stock, setStock] = useState(null);
+  const [stock] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(()=>{
-    if(data[0].stock) {
-      StockFormatterService.convertStocksToArray(data[0].stock);
-      setStock(data[0].stock);
-    }
-  },[data]);
+    // API
+    DataService.fetchData().then((response: any) => {
+      const data = response.data;
+      
+      if(data.stock) {
+        dispatch(setStockData(data));
+      }
+    });
+  },[]);
 
   const getUser = async () => {
     const user = await AuthBackendApiService.getUserFromToken(token);
@@ -30,6 +35,8 @@ const DashBoard = (props: any) => {
     StorageService.setKey("userData", userData);
   };
 
+  console.log(stock);
+  
   useEffect(() => {
     if (token) {
       StorageService.setKey("token", token);

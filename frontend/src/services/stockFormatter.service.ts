@@ -4,6 +4,8 @@ class StockFormatterService {
   static stocksMentionCountArray: {name: string, mentions: number}[] = [];
   static topNArray: {[n: number]: any[]} = {};
   static convertStocksToArray(stockData: any) {
+    console.log({ stockData });
+    
     if(!stockData) return ;
     const arry = [];
     for (let stockName of STOCK_NAME_LIST) {
@@ -11,6 +13,7 @@ class StockFormatterService {
       arry.push({ name: stockName, mentions: stockData[stockName] });
     }
     this.stocksMentionCountArray = arry.slice();
+    
     return arry.slice();
   }
 

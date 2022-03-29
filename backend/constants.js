@@ -9,8 +9,9 @@ const getColumns = (Sequelize) => {
     return columns;
 }
 
-require('dotenv').config({ path: `.env.${process.env.NODE_ENV}` })
-console.log(`./.env.${process.env.NODE_ENV}`)
+const environment = process.env.NODE_ENV || 'development';
+require('dotenv').config({ path: `.env.${environment}` })
+console.log(`./.env.${environment}`)
 
 const APP_URL = process.env.APP_URL;
 const SERVER_URL = process.env.SERVER_URL;

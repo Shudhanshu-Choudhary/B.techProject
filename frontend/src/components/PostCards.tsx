@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
 import { withRouter } from "react-router-dom";
 import { Card } from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
-import { StockDataContext } from "../hooks/DataContext";
 
 interface IStock {
     author: string
@@ -14,10 +13,10 @@ interface IStock {
 }
 const PostCards = ()=>{
   const [stocks, setStocks] = useState(null);
-  const data: any = useContext(StockDataContext);
+  const data: any = [];
 
   useEffect(() => {
-    if(!stocks) {
+    if(stocks) { // TODO it was !stocks
       console.log("posts data", data[0].posts);
       setStocks(data[0].posts);
     }

@@ -10,7 +10,6 @@ import Home from "./pages/Home";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { Theme } from "./theme";
 import GlobalCss from "./components/home/styles/jss/GlobalCss";
-import { StockDataProvider } from "./hooks/DataContext";
 import Posts from "./pages/Posts";
 import Picks from "./pages/Picks";
 import axios from "axios";
@@ -59,12 +58,10 @@ function App() {
                 <Route path='/' exact={true} component={Home}/>
                 <Route path='/login' exact={true} component={Login}/>
                 <Route path='/register' exact={true} component={Register}/>
-                <StockDataProvider>
-                  <Route path= '/posts' exact={true} component={Posts}/>
-                  <Route path= '/account' exact={true} component={Account}/>
-                  <Route path= '/picks' exact={true} component={Picks}/>
-                  <Route path= '/dashboard' exact={true} component={DashBoard}/>
-                </StockDataProvider>
+                <Route path= '/posts' exact={true} component={Posts}/>
+                <Route path= '/account' exact={true} component={Account}/>
+                <Route path= '/picks' exact={true} component={Picks}/>
+                <Route path= '/dashboard' exact={true} component={DashBoard}/>
               </Switch>
             </div>
           </Router>
