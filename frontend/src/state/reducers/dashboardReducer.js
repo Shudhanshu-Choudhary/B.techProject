@@ -4,6 +4,8 @@ export const dashboardSlice = createSlice({
   name: "dashboard",
   initialState: {
     value: 0,
+    pick: {},
+    allStocks: {}
   },
   reducers: {
     increment: (state) => {
@@ -20,6 +22,13 @@ export const dashboardSlice = createSlice({
       console.log({ payload: action.payload });
       state.stockData = action.payload;
     },
+    setPickData: (state, action) => {
+      state.pick = action.payload;
+    },
+    setAllStocks: (state, action) => {
+      console.log(action.payload);
+      state.allStocks = action.payload;
+    },
     incrementByAmount: (state, action) => {
       state.value += action.payload;
     },
@@ -27,6 +36,6 @@ export const dashboardSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount, setStockData } = dashboardSlice.actions;
+export const { increment, decrement, incrementByAmount, setStockData, setPickData, setAllStocks } = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

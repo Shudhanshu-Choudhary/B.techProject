@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Table } from "semantic-ui-react";
 import StockFormatterService from "../../services/stockFormatter.service";
 
 const DbTable = ()=>{
   const [stocks, setStocks] = useState(null);
+  const stocksArr = useSelector((state: any) => state.dashboard.allStocks);
   useEffect(() => {
-    if(!stocks) {
-      const data = StockFormatterService.getTopNStocks(8);
+    if (stocksArr) {
+      const data = StockFormatterService.getTopNStocks(stocksArr,8);
       console.log("table data", data);
       setStocks(data);
     }
-  }, []);
+  }, [stocksArr]);
   const renderTableBody = ()=>{
     const rows: JSX.Element[] = [];
     if(!stocks) return [];

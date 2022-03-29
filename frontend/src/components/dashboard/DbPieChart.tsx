@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 import StockFormatterService from "../../services/stockFormatter.service";
 import { AutoSizer } from "react-virtualized";
+import { useSelector } from "react-redux";
+import { RootState } from "../..";
+// import { number, string } from "prop-types";
 
 const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#1aff00", "#FF8042", ];
 
@@ -19,14 +22,19 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#1aff00", "#FF8042", ];
 // };
 
 const DbPieChart = () => {
+
+  const allStocks = useSelector((state: RootState) => state.dashboard.stockData);
+
   const [stocks, setStocks] = useState(null);
+  
   useEffect(() => {
-    if(!stocks) {
-      const data = StockFormatterService.getTopNStocks(5);
+    if(allStocks) {
+      const data = StockFormatterService.getTopNStocks(allStocks, 5);
       console.log("pie data", data);
       setStocks(data);
     }
   }, []);
+  
   return (
 
     <AutoSizer>

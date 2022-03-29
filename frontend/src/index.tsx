@@ -10,6 +10,7 @@ import store from "./state/store";
 export interface RootState {
     dashboard: {
         stockData: any
+        pick: any
     }
 }
 

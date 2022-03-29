@@ -6,8 +6,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../index";
 
 const DbBarChart = ()=> {
-  const { parsedStock } = useSelector((state: RootState) => {    
-    const parsedStock = StockFormatterService.convertStocksToArray(state.dashboard.stockData.stock);
+  
+  const { parsedStock }  = useSelector((state: RootState) => {    
+    console.log(state.dashboard.pick.stock);
+    const parsedStock = StockFormatterService.convertStocksToArray(state.dashboard.pick.stock);
+    console.log(parsedStock);
+    
     return {
       parsedStock,
     };

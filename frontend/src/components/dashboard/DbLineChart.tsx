@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { CartesianGrid, Legend, Line, LineChart, Tooltip, XAxis, YAxis } from "recharts";
 import { AutoSizer } from "react-virtualized";
 import StockFormatterService from "../../services/stockFormatter.service";
+import { useSelector } from "react-redux";
 
 const DbLineChart = () => {
   const [stocks, setStocks] = useState(null);
+  const stocksArr = useSelector((state: any) => state.dashboard.allStocks);
   useEffect(() => {
-    if(!stocks) {
-      const data = StockFormatterService.getTopNStocks(10);
+    if (stocksArr) {
+      const data = StockFormatterService.getTopNStocks(stocksArr,8);
       console.log("line data", data);
       setStocks(data);
     }
-  }, []);
+  }, [stocksArr]);
   return (
     <AutoSizer>
       {({ height, width }) => (

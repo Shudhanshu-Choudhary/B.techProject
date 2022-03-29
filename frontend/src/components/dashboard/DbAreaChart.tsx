@@ -2,16 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Area, AreaChart, CartesianGrid, Tooltip, XAxis, YAxis } from "recharts";
 import StockFormatterService from "../../services/stockFormatter.service";
 import { AutoSizer } from "react-virtualized";
+import { useSelector } from "react-redux";
 
-const DbAreaChart = ()=>{
+const DbAreaChart = () => {
   const [stocks, setStocks] = useState(null);
+  const stocksArr = useSelector((state: any) => state.dashboard.allStocks);
   useEffect(() => {
-    if(!stocks) {
-      const data = StockFormatterService.getTopNStocks(20);
-      console.log("area data", data);
+    if (stocksArr) {
+      const data = StockFormatterService.getTopNStocks(stocksArr,8);
+      console.log("table data", data);
       setStocks(data);
     }
-  }, []);
+  }, [stocksArr]);
 
   return(
     <AutoSizer>
