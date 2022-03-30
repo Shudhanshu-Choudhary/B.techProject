@@ -75,6 +75,13 @@ app.get('/api/v1/data', async (req, res) => {
     const stockData = await RedditService.getData();
     res.status(200).send(stockData)
 })
+app.get('/api/v1/all-posts', async (req, res) => {
+    const stockData = await RedditService.getAllPosts({
+        limit: req.query.limit,
+        page: req.query.page,
+    });
+    res.status(200).send(stockData)
+})
 app.get('/api/v1/posts', async (req,res) => {
     const posts = await RedditService.getPosts();
     res.status(200).send(posts)

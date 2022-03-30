@@ -89,6 +89,17 @@ class RedditService {
         return {stock: stock[0], stockMeta, posts}
     }
 
+    static async getAllPosts({limit, page}) {
+        const { count, rows} = await Post.findAndCountAll({
+            limit,
+            offset: page,
+        });
+        return {
+            count,
+            posts: rows
+        };
+    }
+
     static async updatePosts() {
         const res = await axios.get("https://api.pushshift.io/reddit/submission/search?subreddit=wallstreetbets,stocks&limit=30");
         const postObjs = []

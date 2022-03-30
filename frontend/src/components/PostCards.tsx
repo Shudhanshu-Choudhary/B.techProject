@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
 import DataService from "../services/data.service";
 import { withRouter } from "react-router-dom";
-import { Card} from "semantic-ui-react";
+import { Card, Loader} from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
 import PaginationExampleCompact from "../pages/pagination";
 
@@ -18,26 +18,22 @@ interface IStock {
 const postsPerPage = 10;
 const PostCards = ()=> {
 
-    const [allPosts, setAllPosts] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [postsToShow, setPostsToShow] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(10);
 
   useEffect(()=>{
-    // API  
-    DataService.fetchData().then((response: any) => {
-      const data = response.data;
-      console.log(data);
-      if(data.posts) {
-        setAllPosts(data.posts);
-        setTotalPages(data.posts.length / postsPerPage);
-      }
-    });
-  },[]);
-
-  useEffect(() => {
-          setPostsToShow(allPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage));
-  }, [currentPage, allPosts]);
+    // API
+      setLoading(true);
+      DataService.fetchAllPosts({page: currentPage, limit: postsPerPage}).then((response: any) => {
+          if (response.data) {
+              setTotalPages(response.data.count / postsPerPage);
+              setPostsToShow(response.data.posts);
+          }
+          setLoading(false);
+      });
+  },[currentPage]);
 
   const changePageNumberHandler = (e, { activePage }) => {
       setCurrentPage(activePage);
@@ -66,18 +62,31 @@ const PostCards = ()=> {
     });
   };
 
-  return(
+  return (
     <div className="postCard-container">
-      <div style={{ display: "flex",justifyContent: "space-between", flexWrap: "wrap", margin: "1rem 2rem" }}>
-         {renderStockData()}
-      </div>
-      <div className="pagination-container">
-        <PaginationExampleCompact
-            defaultActivePage={currentPage}
-            totalPages={totalPages}
-            changePageNumberHandler={changePageNumberHandler}
-        />
-      </div>
+        {
+            loading ? (
+                <Loader active={true}>Loading</Loader>
+            ) : (
+                <>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        flexWrap: "wrap",
+                        margin: "1rem 2rem"
+                    }}>
+                        {renderStockData()}
+                    </div>
+                    <div className="pagination-container">
+                        <PaginationExampleCompact
+                            defaultActivePage={currentPage}
+                            totalPages={totalPages}
+                            changePageNumberHandler={changePageNumberHandler}
+                        />
+                    </div>
+                </>
+            )
+        }
     </div>
   );
 };
