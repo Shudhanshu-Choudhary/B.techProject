@@ -18,10 +18,10 @@ interface IStock {
 const PostCards = ()=> {
   
   const [posts, setPosts] = useState(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(10);
   
-
   useEffect(()=>{
     // API  
     DataService.fetchData().then((response: any) => {
@@ -50,7 +50,7 @@ const PostCards = ()=> {
     }
     posts.map((post: IStock) => {
       const thumbnail = (post.thumbnail === "default" || post.thumbnail === "self") ? defaultThumbnail : post.thumbnail;
-      stockCards.push(
+      return (
         <div className="cards" key={post.id}>
             <Card style={{ margin: "1rem", padding: "0.1rem", width: "22rem"}} >
               <Card.Content >
@@ -68,7 +68,6 @@ const PostCards = ()=> {
         </div>
       );
     });
-    return stockCards;
   };
 
   return(
