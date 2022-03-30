@@ -18,8 +18,9 @@ interface IStock {
 const PostCards = ()=> {
   
   const [posts, setPosts] = useState(null);
-  const [totalPage, setTotalPage] = useState(0);
-  const [postsPerPage, setPostsPerPage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(10);
+  
 
   useEffect(()=>{
     // API  
@@ -31,15 +32,15 @@ const PostCards = ()=> {
       }
     });
   },[]);
-  console.log(postsPerPage);
+
+  console.log(posts);
   
-  
-  if(posts) {
-    setPostsPerPage(posts.slice(1,11));
-    const val = ( posts.length / postsPerPage.length );
-    console.log(val);
-    setTotalPage(val);
-  }
+  // if(posts) {
+  //   setPostsPerPage(posts.slice(1,11));
+  //   const val = ( posts.length / postsPerPage.length );
+  //   console.log(val);
+  //   setTotalPage(val);
+  // }
 
   const renderStockData = () => {
     const stockCards: Array<JSX.Element> = [];
@@ -47,7 +48,7 @@ const PostCards = ()=> {
     if(!posts) {
       return [];
     }
-    postsPerPage.forEach((post: IStock) => {
+    posts.map((post: IStock) => {
       const thumbnail = (post.thumbnail === "default" || post.thumbnail === "self") ? defaultThumbnail : post.thumbnail;
       stockCards.push(
         <div className="cards" key={post.id}>
@@ -76,7 +77,7 @@ const PostCards = ()=> {
          {renderStockData()}
       </div>
       <div className="pagination-conatiner">
-        <PaginationExampleCompact totalPages={totalPage}/>
+        <PaginationExampleCompact />
       </div>
     </div>
   );

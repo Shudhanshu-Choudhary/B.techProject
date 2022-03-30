@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pagination } from 'semantic-ui-react'
 
-const PaginationExampleCompact = (prop:any) => (
+const PaginationExampleCompact = () => (
     
   <Pagination
     boundaryRange={0}
@@ -10,7 +10,7 @@ const PaginationExampleCompact = (prop:any) => (
     firstItem={null}
     lastItem={null}
     siblingRange={1}
-    totalPages={prop.totalPages}
+    totalPages={10}
   />
 )
 
