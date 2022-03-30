@@ -19,7 +19,7 @@ const PostCards = ()=> {
   
   const [posts, setPosts] = useState(null);
   const [totalPage, setTotalPage] = useState(0);
-  const [postsPerPage, setPostsPerPage] = useState(null);
+  const [postsPerPage, setPostsPerPage] = useState([]);
 
   useEffect(()=>{
     // API  
@@ -33,23 +33,18 @@ const PostCards = ()=> {
   },[]);
   console.log(postsPerPage);
   
-  
-  if(posts) {
-    setPostsPerPage(posts.slice(1,11));
-    const val = ( posts.length / postsPerPage.length );
-    console.log(val);
-    setTotalPage(val);
-  }
+  //
+  // if(posts) {
+  //   const a = posts.slice(1,11);
+  //   setPostsPerPage(a);
+  //   const val = ( posts.length / a.length );
+  //   setTotalPage(val);
+  // }
 
   const renderStockData = () => {
-    const stockCards: Array<JSX.Element> = [];
-
-    if(!posts) {
-      return [];
-    }
-    postsPerPage.forEach((post: IStock) => {
+    return postsPerPage.map((post: IStock) => {
       const thumbnail = (post.thumbnail === "default" || post.thumbnail === "self") ? defaultThumbnail : post.thumbnail;
-      stockCards.push(
+      return (
         <div className="cards" key={post.id}>
             <Card style={{ margin: "1rem", padding: "0.1rem", width: "22rem"}} >
               <Card.Content >
@@ -67,7 +62,6 @@ const PostCards = ()=> {
         </div>
       );
     });
-    return stockCards;
   };
 
   return(
