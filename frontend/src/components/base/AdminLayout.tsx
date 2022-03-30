@@ -1,6 +1,6 @@
 import React from "react";
 import "../../assets/scss/components/layout.scss";
-import SideBar from "../SideBar";
+import Topbar from "../SideBar";
 
 interface IProps {
     header: string,
@@ -8,10 +8,13 @@ interface IProps {
     children: React.ReactFragment
 }
 const AdminLayout = (props: IProps)=>{
+
+  console.log(props);
+  
   return(
     <div className='layout-container'>
       <div className='layout-content-container'>
-        <SideBar id={props.id}/>
+        <Topbar id={props.id}/>
         <div className='layout-header'>
           {/*<Header primaryHeader={props.header}/>*/}
           {props.children}

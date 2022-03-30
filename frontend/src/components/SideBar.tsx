@@ -3,22 +3,24 @@ import PropTypes from "prop-types";
 import "../assets/scss/sidebar.scss";
 import { NavLink } from "react-router-dom";
 
-const Topbar = (props:any)=>{
+const Topbar = (props:any) => {
+
   let id = props.id;
+  console.log(props);
+  
+
   const topbarData = [
     { id: 1,text: "DashBoard",link: "/dashboard" },
     { id: 2,text: "Picks",link: "/picks" },
     { id: 3,text: "Posts",link: "/posts" },
-    { id: 4,text: "Account", link: "/account" }
+    { id: 4,text: "Account",link: "/account" }
   ];
 
-  const renderTopBar = ()=>{
+  const renderTopBar = () => {
+
     const topbarIcons:any = [];
-    // const routeIconMap:any = {
-    //   Bag: props.id === 1 ? selectedbagIcon : defaultbagIcon,
-    //   Account: props.id === 2 ? selectedAccountIcon : defaultAccountIcon
-    // };
-    topbarData.map((icon,index)=>{
+
+    topbarData.map((icon, index)=>{
       let clsName = "topbar-icon";
       if(icon.id === id){
         clsName = "topbar-icon topbar-icon-selected";

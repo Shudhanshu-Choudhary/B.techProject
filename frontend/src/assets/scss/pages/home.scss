@@ -43,3 +43,10 @@
 .home-header:hover{
   box-shadow: 1px 5px #cbcbcb;
 }
+
+.pagination-conatiner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}

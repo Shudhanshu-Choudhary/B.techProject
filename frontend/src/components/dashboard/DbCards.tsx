@@ -1,25 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import { useSelector } from "react-redux";
 import DetailsCard from "../base/DetailsCard";
 
 const DbCards = ()=>{
-  const [stockMeta, setStockMeta] = useState(null);
-  const data = [{ stockMeta: false }];
-  useEffect(()=>{
-    console.log(data);
-    if(data[0].stockMeta) {
-      console.log("Setting stock meta");
-      console.log(stockMeta);
-      setStockMeta(data[0].stockMeta);
+
+  const { allMeta } = useSelector((state: any) => {
+    const allMeta = state.dashboard.stockData.stockMeta;
+    return {
+      allMeta,
     }
-  },[data]);
+  });
 
   return(
     <div className="home-card-container">
-      {stockMeta && stockMeta.lastWeek ? (<>
-        <DetailsCard text={stockMeta.today || stockMeta.yesterday} header={"Most Mentioned Today"} color={"#FFF"}/>
-        <DetailsCard text={stockMeta.yesterday} header={"Most Mentioned Yesterday"} color={"#FFF"}/>
-        <DetailsCard text={stockMeta.lastWeek} header={"Most Mentioned Week"} color={"#FFF"}/>
-        <DetailsCard text={stockMeta.lastMonth} header={"Most Mentioned All-time"} color={"#FFF"}/></>) : "Loading"}
+      {allMeta && allMeta.lastWeek ? (
+        <>
+          <DetailsCard text={allMeta.today || allMeta.yesterday} header={"Most Mentioned Today"} color={"#FFF"}/>
+          <DetailsCard text={allMeta.yesterday} header={"Most Mentioned Yesterday"} color={"#FFF"}/>
+          <DetailsCard text={allMeta.lastWeek} header={"Most Mentioned Week"} color={"#FFF"}/>
+          <DetailsCard text={allMeta.lastMonth} header={"Most Mentioned All-time"} color={"#FFF"}/>
+        </>
+        ) : "Loading"
+      }
     </div>
   );
 };
