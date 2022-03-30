@@ -4,7 +4,7 @@ import DataService from "../services/data.service";
 import { withRouter } from "react-router-dom";
 import { Card} from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
-import PaginationExampleCompact from "../pages/paggination";
+import PaginationExampleCompact from "../pages/pagination";
 
 
 interface IStock {
@@ -15,40 +15,36 @@ interface IStock {
     subreddit: string
     thumbnail: string
 }
+const postsPerPage = 10;
 const PostCards = ()=> {
-  
-  const [posts, setPosts] = useState(null);
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(10);
-  
+    const [allPosts, setAllPosts] = useState([]);
+    const [postsToShow, setPostsToShow] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(10);
+
   useEffect(()=>{
     // API  
     DataService.fetchData().then((response: any) => {
       const data = response.data;
       console.log(data);
       if(data.posts) {
-        setPosts(data.posts);
+        setAllPosts(data.posts);
+        setTotalPages(data.posts.length / postsPerPage);
       }
     });
   },[]);
 
-  console.log(posts);
-  
-  // if(posts) {
-  //   setPostsPerPage(posts.slice(1,11));
-  //   const val = ( posts.length / postsPerPage.length );
-  //   console.log(val);
-  //   setTotalPage(val);
-  // }
+  useEffect(() => {
+          setPostsToShow(allPosts.slice((currentPage - 1) * postsPerPage, currentPage * postsPerPage));
+  }, [currentPage, allPosts]);
+
+  const changePageNumberHandler = (e, { activePage }) => {
+      setCurrentPage(activePage);
+  }
 
   const renderStockData = () => {
-    const stockCards: Array<JSX.Element> = [];
-
-    if(!posts) {
-      return [];
-    }
-    posts.map((post: IStock) => {
+    return postsToShow.map((post: IStock) => {
       const thumbnail = (post.thumbnail === "default" || post.thumbnail === "self") ? defaultThumbnail : post.thumbnail;
       return (
         <div className="cards" key={post.id}>
@@ -75,8 +71,12 @@ const PostCards = ()=> {
       <div style={{ display: "flex",justifyContent: "space-between", flexWrap: "wrap", margin: "1rem 2rem" }}>
          {renderStockData()}
       </div>
-      <div className="pagination-conatiner">
-        <PaginationExampleCompact />
+      <div className="pagination-container">
+        <PaginationExampleCompact
+            defaultActivePage={currentPage}
+            totalPages={totalPages}
+            changePageNumberHandler={changePageNumberHandler}
+        />
       </div>
     </div>
   );
