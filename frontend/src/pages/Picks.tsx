@@ -35,7 +35,7 @@ const Picks = () => {
       picks.push(
         <div className='picks-selected-item' key={index}>
           <span>{pick}</span>
-          <Icon className='transform-icon' name='delete' color='red' size='large' onClick={() => deletePicks(index)}/>
+          <Icon className='transform-icon pointer' name='delete' color='white' size='large' onClick={() => deletePicks(index)}/>
         </div>
       );
     });
@@ -64,12 +64,12 @@ const Picks = () => {
             onChange={(e, newValue) => {updatePicks(newValue);} }
             options={STOCK_NAME_LIST}
             getOptionLabel={(option: any) => option}
-            className='picks-input'
+            className='picks-input pointer'
             renderInput={(params: any) => <TextField {...params} label="Combo box" variant="outlined" />}
           />
         </div>
-        {userPicks && userPicks.length ? renderPicks() : "No user picks"}
-        <Button onClick={saveUserPicks} variant="contained" color="primary">Save</Button>
+        {userPicks?.length ? renderPicks() : null}
+        <Button className="picks-save-btn" onClick={saveUserPicks} variant="contained" color="primary">Save</Button>
       </div>
     </AdminLayout>
   );

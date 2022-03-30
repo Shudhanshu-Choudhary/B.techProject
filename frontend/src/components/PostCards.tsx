@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../assets/scss/pages/home.scss";
 import DataService from "../services/data.service";
 import { withRouter } from "react-router-dom";
-import { Card, Loader} from "semantic-ui-react";
+import { Loader} from "semantic-ui-react";
 import defaultThumbnail from "../assets/pMkc6Lo.png";
 import PaginationExampleCompact from "../pages/pagination";
 
@@ -44,19 +44,19 @@ const PostCards = ()=> {
       const thumbnail = (post.thumbnail === "default" || post.thumbnail === "self") ? defaultThumbnail : post.thumbnail;
       return (
         <div className="cards" key={post.id}>
-            <Card style={{ margin: "1rem", padding: "0.1rem", width: "22rem"}} >
-              <Card.Content >
+            <div className='post-card-item'>
+              <div className='post-card-item-heading'>
                 <div><span style={{ fontWeight: "bold" }}>{post.title}</span></div>
                 <span style={{ color: "#898989" }}>by {post.author}</span>
-              </Card.Content>
-              <Card.Content extra>
+              </div>
+              <div className='post-card-item-content'>
                 <img src={thumbnail} style={{ height: "4rem", width: "5rem", borderRadius: "50%" }} alt=""/>
                 <div>
                   <span>Subreddit: {post.subreddit}</span>
                 </div>
                 <a href={post.link} target='_blank' rel='noreferrer'>View more</a>
-              </Card.Content>
-          </Card>
+              </div>
+          </div>
         </div>
       );
     });
@@ -69,12 +69,7 @@ const PostCards = ()=> {
                 <Loader active={true}>Loading</Loader>
             ) : (
                 <>
-                    <div style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        flexWrap: "wrap",
-                        margin: "1rem 2rem"
-                    }}>
+                    <div className='cards-container'>
                         {renderStockData()}
                     </div>
                     <div className="pagination-container">

@@ -16,6 +16,14 @@
     width: 400px;
     display: flex;
     justify-content: space-between;
+    padding: 12px 8px;
+    color: white;
+    background: #8985d4;
+    font-weight: bold;
     margin: 10px auto;
   }
+}
+
+.MuiButtonBase-root.picks-save-btn {
+  margin-top: 16px;
 }
