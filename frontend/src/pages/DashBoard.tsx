@@ -6,15 +6,11 @@ import AdminLayout from "../components/base/AdminLayout";
 import { withRouter } from "react-router-dom";
 import StorageService from "../services/storageService";
 import DataService from "../services/data.service";
-import AuthBackendApiService from "../services/authBackendApi.service";
 import DbHeader from "../components/dashboard/DbHeader";
 import { setStockData } from "../state/reducers/dashboardReducer";
 import { useDispatch } from "react-redux";
 
-const DashBoard = (props: any) => {
-  const query = new URLSearchParams(props.location.search);
-  const token = query.get("token") || StorageService.getValueFromKey("token");
-
+const DashBoard = () => {
   const [isStockAvailable, setIsStocksAvailable] = useState(false);
   const dispatch = useDispatch();
 
@@ -29,19 +25,6 @@ const DashBoard = (props: any) => {
       }
     });
   },[]);
-
-  const getUser = async () => {
-    const user = await AuthBackendApiService.getUserFromToken(token);
-    const userData = JSON.stringify(user.data);
-    StorageService.setKey("userData", userData);
-  };
-  
-  useEffect(() => {
-    if (token) {
-      StorageService.setKey("token", token);
-      getUser();
-    }
-  }, []);
 
   return(
     <AdminLayout header='DashBoard' id={1}>

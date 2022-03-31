@@ -2,8 +2,22 @@ import React from "react";
 import PropTypes from "prop-types";
 import "../assets/scss/sidebar.scss";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
+import StorageService from "../services/storageService";
 
 const Topbar = (props:any) => {
+
+  axios.interceptors.request.use(
+    request =>  {
+      if (request.url !== "/auth/login") {
+        request.headers["token"] = StorageService.getValueFromKey("token");
+      }
+      return request;
+    },
+    error => {
+      return Promise.reject(error);
+    }
+  );
 
   let id = props.id;
   console.log(props);

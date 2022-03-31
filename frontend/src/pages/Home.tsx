@@ -7,16 +7,23 @@ import Testimonial6 from "../components/home/Testimonial6";
 import Pricing2 from "../components/home/Pricing2";
 import Subscription1 from "../components/home/Subscription1";
 import Footer2 from "../components/home/Footer2";
+import { useSelector } from "react-redux";
 
 const Home = ()=>{
+
+  const isUserLogged = useSelector((state: any) => state.user.isLogged);
+  
   useEffect(() => {
     const api = process.env.REACT_APP_API_ENDPOINT;
     console.log(api);
     scrollTo("root");
   });
+
+  console.log(isUserLogged);
+  
   return(
     <div className="landing">
-      <TopBar6 />
+      <TopBar6 isUserLogged={isUserLogged}/>
       <Intro6 />
       <Services8 />
       <Testimonial6 />

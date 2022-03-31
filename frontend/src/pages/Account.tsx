@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { useHistory, withRouter } from "react-router-dom";
 
 // eslint-disable-next-line no-unused-vars
-import { Button, Card, Icon, Image, Message } from "semantic-ui-react";
+import { Message } from "semantic-ui-react";
 import StorageService from "../services/storageService";
 import AdminLayout from "../components/base/AdminLayout";
 import "../assets/scss/pages/account.scss";
+import { useDispatch } from "react-redux";
+import { setUserIsLoggedIn } from "../state/reducers/userReducer";
 
 const Account = ()=>{
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const [userData, setUserData] = useState({ user: {
     name: null,
     email: null,
@@ -35,6 +37,7 @@ const Account = ()=>{
 
   const handleLogout = () => {
     StorageService.clearStorage();
+    dispatch(setUserIsLoggedIn(false));
     history.push("/");
   };
   const renderUser = () => {

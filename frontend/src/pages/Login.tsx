@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Divider, Form, Icon, Input } from "semantic-ui-react";
 import "../assets/scss/pages/login.scss";
-import { withRouter } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import AuthBackendApiService from "../services/authBackendApi.service";
 import { Layout } from "./Layout";
+import { connect, useDispatch } from "react-redux";
 import StorageService from "../services/storageService";
+import { setUserIsLoggedIn } from "../state/reducers/userReducer";
 
 interface IState {
     [key: string]: any; // or the type of your input
@@ -12,31 +14,35 @@ interface IState {
     password: string
 }
 
-class Login extends React.Component<any,IState>{
-
-    changeHandler = (e: any): void => {
-      this.setState({
+const Login = (props) => {
+    const history = useHistory();
+    const dispatch = useDispatch();
+    const [state, setState] = useState({});
+    const changeHandler = (e: any): void => {
+      setState(prevState => ({
+        ...prevState,
         [e.target.name]: e.target.value
-      });
+      }));
     }
 
-    continue = async () => {
+
+    const onSubmitHandler = async () => {
       try {
-        const res = await AuthBackendApiService.login(this.state);
-        console.log(res);
+        const res = await AuthBackendApiService.login(state);
         StorageService.setKey("userData", JSON.stringify({ user: res.data.user }));
-        StorageService.setKey("token", res.data.token);
-        this.props.history.push("/dashboard");
+        StorageService.setKey("token", res.data.token); 
+        console.log({res});
+        dispatch(setUserIsLoggedIn(true));
+        history.push("/dashboard");
       } catch (e) {
         console.log(e.response);
       }
-      // this.props.history.push("/");
+      // props.history.push("/");
     }
 
-    goToRegister = () => {
-      this.props.history.push("/register");
+    const goToRegister = () => {
+      history.push("/register");
     }
-    render() {
       return(
         <Layout>
           <div className='signin-main-container'>
@@ -47,7 +53,7 @@ class Login extends React.Component<any,IState>{
               <Form>
                 <div className='signin-email-container'>
                   <div className='signin-email-header'><span>Email Address</span></div>
-                  <Input onChange={this.changeHandler}
+                  <Input onChange={changeHandler}
                     type='email'
                     name='email'
                     placeholder='johndoe@gmail.com'
@@ -59,7 +65,7 @@ class Login extends React.Component<any,IState>{
                   <div className='signin-password-header'>
                     <span className='signin-password-header-primary'>Password</span>
                   </div>
-                  <Input onChange={this.changeHandler}
+                  <Input onChange={changeHandler}
                     icon='lock'
                     iconPosition='left'
                     name='password'
@@ -68,7 +74,7 @@ class Login extends React.Component<any,IState>{
                     style={{ width: "100%" }}/>
                 </div>
               </Form>
-              <div onClick={this.continue} className='signin-button'>
+              <div onClick={onSubmitHandler} className='signin-button'>
                 <span>Sign In</span>
               </div>
               <Divider horizontal>Or</Divider>
@@ -84,14 +90,14 @@ class Login extends React.Component<any,IState>{
               <div className='signin-not-registered'>
                 <h5>Not registered yet?</h5>
               </div>
-              <div onClick={this.goToRegister} className='signin-register-button signin-button '>
+              <div onClick={goToRegister} className='signin-register-button signin-button '>
                 <span>Register</span>
               </div>
             </div>
           </div>
         </Layout>
       );
-    }
-}
+  
+      }
 
-export default withRouter(Login);
+export default Login;

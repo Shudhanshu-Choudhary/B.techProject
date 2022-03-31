@@ -27,7 +27,7 @@ authRouter.get('/google-cb', async (req, res) => {
     // }
     const user = await UserService.handleGoogleLogin(googleUser)
     const token = await JWTService.generateJWTToken(user, 'google');
-    const url = `${constants.appUrl}/dashboard?token=${token}`
+    const url = `${constants.appUrl}/?token=${token}`
     res.redirect(url);
 });
 
@@ -57,7 +57,7 @@ authRouter.get('/facebook-cb', async (req, res) => {
     // }
     const user = await UserService.handleFacebookLogin(facebookUser)
     const token = await JWTService.generateJWTToken(user, 'facebook');
-    const url = `${constants.appUrl}/dashboard?token=${token}`
+    const url = `${constants.appUrl}/?token=${token}`
     res.redirect(url);
 });
 

@@ -19,6 +19,8 @@ export default class AuthBackendApiService {
   }
 
   static async loginWithGoogle() {
+    console.log({baseUrl});
+    debugger;
     window.location.href = baseUrl + "auth/login/google";
   }
 

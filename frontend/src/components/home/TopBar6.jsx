@@ -8,6 +8,8 @@ import { Button } from "@material-ui/core";
 
 // eslint-disable-next-line no-unused-vars
 const TopBar6 = (props) => {
+
+  const isUserLogged = props.isUserLogged;
   const [isTop, setIsTop] = useState(true);
   const [isClosed, setIsClosed] = useState(true);
 
@@ -83,26 +85,50 @@ const TopBar6 = (props) => {
           </li>
         </ul>
         <div className="m-auto" />
-        <div className="navigation flex">
-          <NavLink to="/login" className="mr-1">
-            <Button
-              className="box-shadow-none px-8 rounded-l hover-bg-primary capitalize"
-              variant="outlined"
-              color="primary"
-            >
-              Login
-            </Button>
+        {!isUserLogged ? (
+           <div className="navigation flex">
+              <NavLink to="/login" className="mr-1">
+                <Button
+                  className="box-shadow-none px-8 rounded-l hover-bg-primary capitalize"
+                  variant="outlined"
+                  color="primary"
+                >
+                  Login
+                </Button>
+              </NavLink>
+              <NavLink to="/register">
+                <Button
+                  className="box-shadow-none px-8 rounded-r hover-bg-primary capitalize"
+                  variant="outlined"
+                  color="primary"
+                >
+                  Signup
+                </Button>
+              </NavLink>
+            </div>
+        ): (
+          <div className="navigation flex">
+            <NavLink to="/dashboard" className="mr-1">
+              <Button
+                className="box-shadow-none px-8 rounded-l hover-bg-primary capitalize"
+                variant="outlined"
+                color="primary"
+              >
+                Dashboard
+              </Button>
           </NavLink>
-          <NavLink to="/register">
-            <Button
-              className="box-shadow-none px-8 rounded-r hover-bg-primary capitalize"
-              variant="outlined"
-              color="primary"
-            >
-              Signup
-            </Button>
+          <NavLink to="/account">
+              <Button
+                className="box-shadow-none px-8 rounded-r hover-bg-primary capitalize"
+                variant="outlined"
+                color="primary"
+              >
+                Account
+              </Button>
           </NavLink>
         </div>
+        )}
+
         <IconButton
           className="header__toggle"
           onClick={() => {
