@@ -4,9 +4,8 @@ import "../assets/scss/pages/login.scss";
 import { useHistory } from "react-router-dom";
 import AuthBackendApiService from "../services/authBackendApi.service";
 import { Layout } from "./Layout";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import StorageService from "../services/storageService";
-import { setUserIsLoggedIn } from "../state/reducers/userReducer";
 
 interface IState {
     [key: string]: any; // or the type of your input
@@ -16,7 +15,6 @@ interface IState {
 
 const Login = (props) => {
     const history = useHistory();
-    const dispatch = useDispatch();
     const [state, setState] = useState({});
     const changeHandler = (e: any): void => {
       setState(prevState => ({
@@ -32,8 +30,7 @@ const Login = (props) => {
         StorageService.setKey("userData", JSON.stringify({ user: res.data.user }));
         StorageService.setKey("token", res.data.token); 
         console.log({res});
-        dispatch(setUserIsLoggedIn(true));
-        history.push("/dashboard");
+        window.location.href= "/";
       } catch (e) {
         console.log(e.response);
       }

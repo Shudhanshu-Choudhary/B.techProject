@@ -27,7 +27,7 @@ class UserService {
     static async login(userParams) {
         try {
             const {email, password} = userParams;
-            console.log('These are the user params');
+            console.log(email);
             const user = await User.findOne({ where: {email} });
             console.log(user)
             if (!user) {
