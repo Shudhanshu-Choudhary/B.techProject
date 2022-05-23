@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { NavLink } from "react-router-dom";
 import ScrollTo from "../home/common/ScrollTo";
 import { Button } from "@material-ui/core";
+import logo from '../../assets/img/react-logo.svg';
 
 // eslint-disable-next-line no-unused-vars
 const TopBar6 = (props) => {
@@ -54,7 +55,7 @@ const TopBar6 = (props) => {
     >
       <div className="container header-container">
         <div className="brand" >
-          <img src="../../assets/img/react-logo.svg" alt=""
+          <img src={logo} alt="app logo"
             style={{ width: "8rem",height: "3rem" }}/>
         </div>
         <ul className="navigation">

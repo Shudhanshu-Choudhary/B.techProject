@@ -88,6 +88,7 @@ function App() {
                 <ProtectedRoutes path='/account' exact={true} Component={Account} isUserLogged={isUserLogged} />
                 <ProtectedRoutes path='/picks' exact={true} Component={Picks} isUserLogged={isUserLogged} />
                 <ProtectedRoutes path='/dashboard' exact={true} Component={DashBoard} isUserLogged={isUserLogged} />
+                <Route path="*" component={Home} />
               </Switch>
             </div>
           </Router>

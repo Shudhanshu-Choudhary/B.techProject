@@ -35,7 +35,7 @@ const Picks = () => {
       picks.push(
         <div className='picks-selected-item' key={index}>
           <span>{pick}</span>
-          <Icon className='transform-icon pointer' name='delete' color='white' size='large' onClick={() => deletePicks(index)}/>
+          <Icon className='transform-icon pointer' name='delete' size='large' onClick={() => deletePicks(index)}/>
         </div>
       );
     });

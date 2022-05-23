@@ -71,7 +71,7 @@ authRouter.post('/login', async (req, res) => {
     const body = req.body;
     const user = await UserService.login(body);
     console.log(body);
-    const token = await JWTService.generateJWTToken(user, 'facebook');
+    const token = await JWTService.generateJWTToken(user, 'other');
 
     if(user === 'Invalid email') {
         res.status(400).send(('Invalid email'));
